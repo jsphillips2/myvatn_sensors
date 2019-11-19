@@ -21,4 +21,22 @@ minidot <- list.files("minidot/raw") %>%
          temp = "Temperature",
          do = "Dissolved Oxygen",
          do_sat = "Dissolved Oxygen Saturation",
-         q = Q)
+         q = Q) %>%
+  select(name, date_time,  temp,  do, do_sat, q)
+
+# import metadata
+meta <- read_csv("minidot/deployment_log19Nov19.csv", col_types = c("cccdDtDtddcdc"))
+
+# import sonde data
+sonde <- read_csv("sonde/sonde_clean.csv", col_types = c("Tdddddd"))
+
+
+
+
+
+#==========
+#========== 2017
+#==========
+
+sonde17 <- sonde %>%
+  mutate(year  = year(date_time))
