@@ -1,0 +1,13 @@
+site,long_name,basin,lat,lon
+st33,Station 33,s,NA,NA
+e1,Emergence Site 1,s,NA,NA
+e2,Emergence Site 2,s,NA,NA
+e3,Emergence Site 3,s,NA,NA
+e4,Emergence Site 4,s,NA,NA
+e5,Emergence Site 5,s,NA,NA
+e6,Emergence Site 6,s,NA,NA
+cs,Cold Springs,s,NA,NA
+reyk,Reykjahlid,n,NA,NA
+grim,Grimmstadir,n,NA,NA
+btl,Boat Launch,s,NA,NA
+buck,Bucket Test in Lab,"NA",NA,NA
