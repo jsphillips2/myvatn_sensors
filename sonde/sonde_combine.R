@@ -41,14 +41,29 @@ sonde <- list.files("sonde/raw") %>%
       mutate(Date_Time = ymd_hms(paste(mdy(Date), Time))) # create date time
     
     if (year %in% c("2014","2015","2016","2017","2018","2019")) {
-      x_csv = x_csv %>% rename(TurbSC = TurbSC_1) # rename TurbSC_1
+      x_csv = x_csv %>% rename(turbsc = TurbSC_1) # rename TurbSC_1
+    }
+    
+    if (year == "2014") {
+      x_csv = x_csv %>% 
+        mutate(`LDO%` = NA,
+               LDO = NA) # fill missing do's with  NA's
     }
     
     return(x_csv) # return
 }) %>%
   bind_rows() %>% # combine files
-  select(Date_Time, Temp, SpCond, TurbSC, `LDO%`, LDO, PCYV) # select columns
- 
+  select(Date_Time, Temp, SpCond, turbsc, `LDO%`, LDO, PCYV) %>% # select columns 
+  rename(date_time = Date_Time, 
+         temp = Temp, 
+         spcond = SpCond,
+         do_sat = `LDO%`, 
+         do = LDO, 
+         pcyv = PCYV) %>%
+  arrange(date_time)
+
+# export
+# write_csv(sonde, "sonde/sonde_clean.csv")
 
 
 
