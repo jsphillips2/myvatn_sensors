@@ -10,7 +10,7 @@ library(lubridate)
 options(mc.cores = parallel::detectCores()-2)
 
 # import data
-data <- list.files("minidot/raw") %>%
+minidot <- list.files("minidot/raw") %>%
   
   parallel::mclapply(function(x){read_csv(paste0("minidot/raw/",x), skip = 8) %>% # read files
       set_names(read_csv(paste0("minidot/raw/",x), skip = 7) %>% names()) %>% # set column names
