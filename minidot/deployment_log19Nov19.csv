@@ -60,9 +60,9 @@ md5,buck,"NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in 
 md6,buck,"NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
 md7,buck,"NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
 md8,buck,"NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,1,calibrating in white bucket at lab; time is slightly off
-md4,e1,ben,NA,2019-08-20,0.77083333333333337,NA,NA,0405911,7274524,n,0,deployed under ice at e1
-md5,e5,ben,NA,2019-08-20,0.83888888888888891,NA,NA,0409775,7276396,n,1,coords likely off by ~20 m
-md6,e6,ben,NA,2019-08-20,0.72430555555555554,NA,NA,0408911,7274363,n,NA,NA
-md7,st33,ben,3.3,2019-08-20,0.82291666666666663,NA,NA,0407609,7276137,n,NA,NA
-md8,e2,ben,NA,2019-08-20,0.79166666666666663,NA,NA,0406269,7278009,n,1,check time
+md4,e1,ben,NA,2019-08-20,18:30:00,NA,NA,0405911,7274524,n,0,deployed under ice at e1
+md5,e5,ben,NA,2019-08-20,20:08:00,NA,NA,0409775,7276396,n,1,coords likely off by ~20 m
+md6,e6,ben,NA,2019-08-20,17:23:00,NA,NA,0408911,7274363,n,NA,NA
+md7,st33,ben,3.3,2019-08-20,19:45:00,NA,NA,0407609,7276137,n,NA,NA
+md8,e2,ben,NA,2019-08-20,19:00:00,NA,NA,0406269,7278009,n,1,check time
 md3,reyk,ben,4.3,NA,NA,NA,NA,NA,NA,n,1,Árni deployed.
