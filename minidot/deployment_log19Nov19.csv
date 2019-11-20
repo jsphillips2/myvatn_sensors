@@ -40,7 +40,7 @@ md1,cs,ben,NA,2018-08-19,"NA",2019-06-07,"NA","NA","NA",n,0,deployed at cold spr
 md2,e5,ben,NA,2018-08-19,"NA",2019-06-07,"NA","NA","NA",n,0,deployed at the bottom of e5 over winter
 md3,e1,ben,NA,2018-08-19,"NA",2019-06-11,"NA","NA","NA",n,0,deployed below ice at e1
 md4,reyk,ben,4.3,2018-08-19,"NA",2019-06-11,"NA","NA","NA",n,0,deployed under ice at reykjahlid
-md5,st33,ben,3.3,2018-08-19,"NA",2019-06-10,"NA","NA","NA",y,0,calibrated against sonde
+md5,st33,ben,3.3,2018-08-19,"NA",2019-06-10,"NA","NA","NA",n,0,calibrated against sonde
 md1,st33,pel,0.5,2019-06-10,18:05:00,2019-06-11,NA,"NA","NA",y,0,calibrating against sonde at st33
 md2,st33,pel,0.5,2019-06-10,"NA",2019-06-11,"NA","NA","NA",y,0,calibrated against sonde
 md6,st33,pel,0.5,2019-06-10,"NA",2019-06-11,"NA","NA","NA",y,0,calibrating against sonde at st33
