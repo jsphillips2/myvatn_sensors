@@ -5,6 +5,7 @@
 # load packages
 library(tidyverse)
 library(lubridate)
+Sys.setenv(TZ = "GMT")
 
 # set cores for parallel
 options(mc.cores = parallel::detectCores()-2)
@@ -14,7 +15,7 @@ minidot <- list.files("minidot/raw") %>%
   
   parallel::mclapply(function(x){read_csv(paste0("minidot/raw/",x), skip = 8) %>% # read files
       set_names(read_csv(paste0("minidot/raw/",x), skip = 7) %>% names()) %>% # set column names
-      mutate(name = str_split(x, "_") %>% map_chr(~.x[1])) # parse names
+      mutate(md = str_split(x, "_") %>% map_chr(~.x[1])) # parse names
   }) %>%
   bind_rows() %>%
   rename(date_time = "UTC_Date_&_Time",
@@ -22,7 +23,26 @@ minidot <- list.files("minidot/raw") %>%
          do = "Dissolved Oxygen",
          do_sat = "Dissolved Oxygen Saturation",
          q = Q) %>%
-  select(name, date_time,  temp,  do, do_sat, q)
+  select(md, date_time,  temp,  do, do_sat, q) %>%
+  mutate(
+    date_time = as_datetime(date_time, tz = "GMT"),
+    # tempreature in Kelvin
+    temp_k = temp + 273.15,
+    # Schmidt number and associated conversion from CO2 to O2
+    # based on Wanninkhoff 1992; Holtgrieve et al 2010; Staehr
+    sch_o2 = 1800.6 + 120.10*temp + 3.7818*temp^2 - 0.047608*temp^3,
+    sch_conv = (sch_o2/600)^(-0.5),
+    # O2 solubility in mL/L
+    # based on Weiss 1970
+    do_sol = exp(-173.4292 + 249.6339*(100/temp_k) + 143.3483*log(temp_k/100) - 21.8492*(temp_k/100)),
+    # convert to mg/L of DO
+    # use ideal gas law, solved for the number of moles n = P*V/(R*T)
+    # use pressure in kPA corrected for Myvatn's elevation of ~300m = 98 kPA
+    # use R = 8.3144598 L*kPa/(K*mol)  
+    # use O2 molar mass of 2*32; multiply by 1000 to convert from g to mg 
+    do_eq = 32*(98*do_sol)/(8.3144598*temp_k)
+  ) %>%
+  arrange(md, date_time)
 
 # import metadata
 meta <- read_csv("minidot/deployment_log19Nov19.csv", col_types = c("cccdDtDtddcdc"))
@@ -35,8 +55,308 @@ sonde <- read_csv("sonde/sonde_clean.csv", col_types = c("Tdddddd"))
 
 
 #==========
-#========== 2017
+#========== Summer 2017
 #==========
 
-sonde17 <- sonde %>%
-  mutate(year  = year(date_time))
+# identify calibration date/md
+cal17 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2017,
+         calibrating == "y")
+
+# extract sonde data
+sonde_cal17 <- sonde %>%
+  mutate(year  = year(date_time)) %>%
+  filter(year == 2017,
+         as.Date(date_time) > cal17$date_in & as.Date(date_time) <= cal17$date_out)
+
+# extract minidot data
+mini_cal17 <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal17) %>%
+  filter(as.Date(date_time) > date_in & as.Date(date_time) <= date_out)
+
+# plot temp
+sonde_cal17 %>%
+  select(date_time,  temp) %>%
+  mutate(type  = "sonde") %>%
+  bind_rows(mini_cal17 %>%
+              select(date_time,  temp) %>%
+              mutate(type  = "minidot")) %>%
+  filter(date_time > "2017-06-16 11:00:00" & date_time <= "2017-06-20 10:00:00") %>%
+  ggplot(aes(date_time,  temp, color  = type))+
+  geom_line()+
+  theme_bw()
+  
+# plot temp
+sonde_cal17 %>%
+  select(date_time,  do) %>%
+  mutate(type  = "sonde") %>%
+  bind_rows(mini_cal17 %>%
+              select(date_time,  do) %>%
+              mutate(type  = "minidot")) %>%
+  filter(date_time > "2017-06-16 11:00:00" & date_time <= "2017-06-20 10:00:00") %>%
+  ggplot(aes(date_time,  do, color  = type))+
+  geom_line()+
+  theme_bw()  
+
+# create calibration data
+cal_data17 <- sonde_cal17 %>%
+  select(date_time,  do) %>%
+  rename(do_sonde = do) %>%
+  left_join(mini_cal17 %>%
+              select(date_time,  do) %>%
+              rename(do = do) %>%
+              mutate(date_time =  date_time  +  2*(60))) %>%
+  filter(date_time > "2017-06-16 11:00:00" & date_time <= "2017-06-20 10:00:00")
+
+# plot
+cal_data17  %>%
+  ggplot(aes(do, do_sonde))+
+  geom_point()+
+  theme_bw()
+
+# regression
+cal_lm17 <- lm(do_sonde ~ do, data = cal_data17)  
+
+# correct mini17
+minidot17_correct <- minidot %>%
+  mutate(year  = year(date_time),
+         date = date(date_time)) %>%
+  inner_join(meta %>%
+               mutate(year  = year(date_in)) %>%
+               filter(year == 2017, date_in == "2017-06-30"))  %>%
+  filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
+  arrange(date_time) %>%
+  {mutate(., do_cor = predict(cal_lm17, newdata = .))} %>%
+  mutate(cal_group  = "summer17") %>%
+  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+# examine
+minidot17_correct %>%
+  ggplot(aes(date_time, do))+
+  geom_line(size = 0.8)+
+  geom_line(aes(y = do_cor), color = "red", size = 0.8)+
+  theme_bw()
+
+# for comparison to bucket test, calculate correction factor
+minidot17_correct %>%
+  summarize(corr = mean(mean(do)/do))
+
+
+
+
+#==========
+#========== 2018 buckets
+#==========
+
+#### June
+
+# extract calibration date/md
+buck_jun18 <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(meta %>%
+               mutate(year  = year(date_in)) %>%
+               filter(year == 2018,
+                      calibrating == "y",
+                      date_in == "2018-06-10")) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out) %>%
+  arrange(date_time)
+
+# plot
+buck_jun18 %>%
+  filter(date_time >= "2018-06-10 18:00:00" & date_time <= "2018-06-11 9:00:00") %>%
+  select(date_time, do, temp, md) %>%
+  gather(var, val, do, temp) %>%
+  group_by(md) %>%
+  ggplot(aes(date_time, val, color = md))+
+  facet_wrap(~var, nrow = 2, scales = "free")+
+  geom_line()+
+  theme_bw()
+
+# calculate correction factor
+corr_jun18 <- buck_jun18 %>%
+  filter(date_time >= "2018-06-10 18:00:00" & date_time <= "2018-06-11 9:00:00") %>%
+  mutate(do_mean = mean(do)) %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_mean/do))
+
+
+#### August
+buck_aug18 <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(meta %>%
+               mutate(year  = year(date_in)) %>%
+               filter(year == 2018,
+                      calibrating == "y",
+                      date_in == "2018-08-17")) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out) %>%
+  arrange(date_time)
+
+# plot
+buck_aug18 %>%
+  filter(date_time >= "2018-08-18 00:00:00" & date_time <= "2018-08-18 16:00:00") %>%
+  select(date_time, do, temp, md) %>%
+  gather(var, val, do, temp) %>%
+  group_by(md) %>%
+  ggplot(aes(date_time, val, color = md))+
+  facet_wrap(~var, nrow = 2, scales = "free")+
+  geom_line()+
+  theme_bw()
+
+# calculate correction factor
+corr_aug18 <- buck_aug18 %>%
+  filter(date_time >= "2018-08-18 00:00:00" & date_time <= "2018-08-18 16:00:00") %>%
+  mutate(do_mean = mean(do)) %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_mean/do))
+
+
+
+
+#==========
+#========== 2017 winter correction
+#==========
+
+
+# identify winter 2017 date/md
+win17 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2017,
+         date_in >= "2017-10-01")
+
+# extract deployment data and correct
+mini_win17 <- minidot %>%
+  inner_join(win17) %>%
+  filter(date_time > date_in & date_time <= date_out) %>%
+  left_join(corr_jun18) %>%
+  mutate(do_cor = corr*do) %>%
+  mutate(cal_group  = "june18") %>%
+  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+# plot
+mini_win17 %>%
+  gather(var, val, do, do_cor) %>%
+  ggplot(aes(date_time, val, color = var))+
+  facet_wrap(~site)+
+  geom_line()+
+  theme_bw()
+
+
+
+
+
+
+#==========
+#========== 2018 summer correction
+#==========
+
+
+# identify winter 2017 date/md
+sum18 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2018,
+         date_in >= "2018-06-13" & date_in <= "2018-08-15")
+
+# extract deployment data and correct
+mini_sum18 <- minidot %>%
+  inner_join(sum18) %>%
+  filter(date_time > date_in & date_time <= date_out) %>%
+  left_join(corr_jun18) %>%
+  mutate(do_cor = corr*do) %>%
+  mutate(cal_group  = "june18") %>%
+  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+# plot
+mini_sum18 %>%
+  gather(var, val, do, do_cor) %>%
+  ggplot(aes(date_time, val, color = var))+
+  facet_grid(layer~site)+
+  geom_line()+
+  theme_bw()
+
+
+
+
+#==========
+#========== 2018 winter correction
+#==========
+
+
+# identify winter 2018 date/md
+win18 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2018,
+         date_in >= "2018-08-19" & date_in <= "2019-06-11")
+
+# extract deployment data and correct
+mini_win18 <- minidot %>%
+  inner_join(win18) %>%
+  filter(date_time > date_in & date_time <= date_out) %>%
+  left_join(corr_aug18) %>%
+  mutate(do_cor = corr*do) %>%
+  mutate(cal_group  = "aug18") %>%
+  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+# Temp
+mini_win18 %>%
+  ggplot(aes(date_time, temp))+
+  facet_wrap(~site, nrow = 2)+
+  geom_vline(data = mini_win18 %>%
+               mutate(year = year(date_time)) %>%
+               group_by(site) %>%
+               filter(year == 2019, temp > 5) %>%
+               summarize(date_time = min(date_time)),
+             aes(xintercept = date_time), color = "red")+
+  geom_hline(yintercept = 5, color = "red")+
+  geom_line()+
+  theme_bw()
+
+# plot DO
+mini_win18 %>%
+  gather(var, val, do, do_cor) %>%
+  ggplot(aes(date_time, val))+
+  facet_wrap(~site, nrow = 2)+
+  geom_vline(data = mini_win18 %>%
+               mutate(year = year(date_time)) %>%
+               group_by(site) %>%
+               filter(year == 2019, temp > 5) %>%
+               summarize(date_time = min(date_time)),
+             aes(xintercept = date_time), color = "red")+
+  geom_line()+
+  theme_bw()
+
+
+
+
+
+
+#==========
+#========== 2019 summer correction
+#==========
+
+# identify summer 2019 date/md
+sum19 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2019,
+         date_in >= "2018-08-19" & date_in <= "2019-06-11")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
