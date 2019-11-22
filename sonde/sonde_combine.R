@@ -5,6 +5,8 @@
 # load packages
 library(tidyverse)
 library(lubridate)
+Sys.setenv(TZ = "GMT")
+
 
 # set cores for parallel
 options(mc.cores = parallel::detectCores()-2)
@@ -60,7 +62,25 @@ sonde <- list.files("sonde/raw") %>%
          do_sat = `LDO%`, 
          do = LDO, 
          pcyv = PCYV) %>%
-  arrange(date_time)
+  arrange(date_time) %>%
+  mutate(
+    date_time = as_datetime(date_time, tz = "GMT"),
+    # tempreature in Kelvin
+    temp_k = temp + 273.15,
+    # Schmidt number and associated conversion from CO2 to O2
+    # based on Wanninkhoff 1992; Holtgrieve et al 2010; Staehr
+    sch_o2 = 1800.6 + 120.10*temp + 3.7818*temp^2 - 0.047608*temp^3,
+    sch_conv = (sch_o2/600)^(-0.5),
+    # O2 solubility in mL/L
+    # based on Weiss 1970
+    do_sol = exp(-173.4292 + 249.6339*(100/temp_k) + 143.3483*log(temp_k/100) - 21.8492*(temp_k/100)),
+    # convert to mg/L of DO
+    # use ideal gas law, solved for the number of moles n = P*V/(R*T)
+    # use pressure in kPA corrected for Myvatn's elevation of ~300m = 98 kPA
+    # use R = 8.3144598 L*kPa/(K*mol)  
+    # use O2 molar mass of 2*32; multiply by 1000 to convert from g to mg 
+    do_eq = 32*(98*do_sol)/(8.3144598*temp_k)
+  )
 
 # export
 # write_csv(sonde, "sonde/sonde_clean.csv")
