@@ -342,8 +342,7 @@ mini_win18 %>%
 # identify summer 2019 date/md
 sum19 <- meta %>%
   mutate(year  = year(date_in)) %>%
-  filter(year == 2019,
-         date_in >= "2018-08-19" & date_in <= "2019-06-11")
+  filter(year == 2019, calibrating == "y", site != "buck")
 
 
 
