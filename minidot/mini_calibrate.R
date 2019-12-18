@@ -45,7 +45,7 @@ minidot <- list.files("minidot/raw") %>%
   arrange(md, date_time)
 
 # import metadata
-meta <- read_csv("minidot/deployment_log19Nov19.csv", col_types = c("cccdDtDtddcdc"))
+meta <- read_csv("minidot/deployment_log22Nov19.csv", col_types = c("cccdDtDtddcdc"))
 
 # import sonde data
 sonde <- read_csv("sonde/sonde_clean.csv", col_types = c("Tdddddd"))
@@ -108,16 +108,14 @@ cal_data17 <- sonde_cal17 %>%
               select(date_time,  do) %>%
               rename(do = do) %>%
               mutate(date_time =  date_time  +  2*(60))) %>%
-  filter(date_time > "2017-06-16 11:00:00" & date_time <= "2017-06-20 10:00:00")
+  filter(date_time > "2017-06-16 11:00:00" & date_time <= "2017-06-20 10:00:00") %>%
+  summarize(corr = mean(do_sonde/do, na.rm = T))
 
 # plot
 cal_data17  %>%
   ggplot(aes(do, do_sonde))+
   geom_point()+
   theme_bw()
-
-# regression
-cal_lm17 <- lm(do_sonde ~ do, data = cal_data17)  
 
 # correct mini17
 minidot17_correct <- minidot %>%
@@ -128,8 +126,8 @@ minidot17_correct <- minidot %>%
                filter(year == 2017, date_in == "2017-06-30"))  %>%
   filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
   arrange(date_time) %>%
-  {mutate(., do_cor = predict(cal_lm17, newdata = .))} %>%
-  mutate(cal_group  = "summer17") %>%
+  mutate(do_cor = cal_data17$corr*do,
+         cal_group = "summer17") %>%
   select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
@@ -336,26 +334,237 @@ mini_win18 %>%
 
 
 #==========
-#========== 2019 summer correction
+#========== 2019 summer calibration (first day)
 #==========
 
 # identify summer 2019 date/md
+cal_sum19a <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2019, calibrating == "y", site != "buck",
+         date_in == "2019-06-10")
+
+
+
+# extract sonde data
+sonde_cal_sum19a <- sonde %>%
+  mutate(year  = year(date_time)) %>%
+  filter(as.Date(date_time) >= cal_sum19a$date_in & as.Date(date_time) <= cal_sum19a$date_out)
+
+# extract minidot data
+mini_cal_sum19a <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_sum19a) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# plot temp
+sonde_cal_sum19a %>%
+  filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+  select(date_time,  temp) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum19a %>%
+              filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+              select(md, date_time,  temp)) %>%
+  ggplot(aes(date_time,  temp, color  = md))+
+  geom_line()+
+  theme_bw()
+
+# plot temp
+sonde_cal_sum19a %>%
+  filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+  select(date_time,  do) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum19a %>%
+              filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+              select(md, date_time,  do)) %>%
+  ggplot(aes(date_time,  do, color  = md))+
+  geom_line()+
+  theme_bw()
+
+mini_cal_sum19a %>%
+  filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+  select(md, date_time,  do) %>%
+  mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+  group_by(md, date_time) %>%
+  summarize(do = mean(do)) %>%
+  full_join(sonde_cal_sum19a %>%
+              filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+              select(date_time,  do) %>%
+              mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+              group_by(date_time) %>%
+              summarize(do_sonde = mean(do))) %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_sonde/do))
+
+match_minis_cal_sum19a <- mini_cal_sum19a %>%
+  filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+  select(md, date_time,  do) %>%
+  mutate(hour  = round_date(date_time, unit = "hour")) %>%
+  left_join(sonde_cal_sum19a %>%
+              filter(date_time >= "2019-06-10 20:00" & date_time <= "2019-06-11 12:00") %>%
+              select(date_time,  do) %>%
+              mutate(hour  = round_date(date_time, unit = "hour")) %>%
+              rename(date_time_sonde = date_time,
+                     do_sonde = do)) %>%
+  mutate(dist = abs(date_time_sonde - date_time)) %>%
+  group_by(md, hour) %>%
+  filter(dist == min(dist)) %>%
+  filter(date_time == min(date_time)) %>%
+  ungroup() %>%
+  select(md, hour, date_time, do, do_sonde) 
+
+match_minis_cal_sum19a %>%
+  gather(var, val, do, do_sonde) %>%
+  mutate(md = ifelse(var == "do_sonde","sonde",md)) %>%
+  ggplot(aes(date_time,  val, color  = md))+
+  geom_point()+
+  geom_line()+
+  geom_line(aes(group = hour), color = "black")+
+  theme_bw()
+
+corr_sum19a <- match_minis_cal_sum19a %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_sonde/do))
+
+
+
+
+
+
+#==========
+#========== 2019 summer calibration (second day)
+#==========
+
+# identify summer 2019 date/md
+cal_sum19b <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2019, calibrating == "y", site != "buck",
+         date_in == "2019-06-15")
+
+
+
+# extract sonde data
+sonde_cal_sum19b <- sonde %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_sum19b) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# extract minidot data
+mini_cal_sum19b <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_sum19b) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# plot temp
+sonde_cal_sum19b %>%
+  filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-16 11:00") %>%
+  select(date_time,  temp) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum19b %>%
+              filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-16 11:00") %>%
+              select(md, date_time,  temp)) %>%
+  ggplot(aes(date_time,  temp, color  = md))+
+  geom_line()+
+  theme_bw()
+
+# plot do
+sonde_cal_sum19b %>%
+  filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-15 18:30") %>%
+  select(date_time,  do) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum19b %>%
+              filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-15 18:30") %>%
+              select(md, date_time,  do)) %>%
+  ggplot(aes(date_time,  do, color  = md))+
+  geom_line()+
+  theme_bw()
+
+mini_cal_sum19b %>%
+  filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-15 18:30") %>%
+  select(md, date_time,  do) %>%
+  mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+  group_by(md, date_time) %>%
+  summarize(do = mean(do)) %>%
+  full_join(sonde_cal_sum19b %>%
+              filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-15 18:30") %>%
+              select(date_time,  do) %>%
+              mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+              group_by(date_time) %>%
+              summarize(do_sonde = mean(do))) %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_sonde/do))
+
+match_minis_cal_sum19b <- mini_cal_sum19b %>%
+  filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-15 18:30") %>%
+  select(md, date_time,  do) %>%
+  mutate(hour  = round_date(date_time, unit = "hour")) %>%
+  left_join(sonde_cal_sum19b %>%
+              filter(date_time >= "2019-06-15 12:30" & date_time <= "2019-06-15 18:30") %>%
+              select(date_time,  do) %>%
+              mutate(hour  = round_date(date_time, unit = "hour")) %>%
+              rename(date_time_sonde = date_time,
+                     do_sonde = do)) %>%
+  mutate(dist = abs(date_time_sonde - date_time)) %>%
+  group_by(md, hour) %>%
+  filter(dist == min(dist)) %>%
+  filter(date_time == min(date_time)) %>%
+  ungroup() %>%
+  select(md, hour, date_time, do, do_sonde) 
+
+match_minis_cal_sum19b %>%
+  gather(var, val, do, do_sonde) %>%
+  mutate(md = ifelse(var == "do_sonde","sonde",md)) %>%
+  ggplot(aes(date_time,  val, color  = md))+
+  geom_point()+
+  geom_line()+
+  geom_line(aes(group = hour), color = "black")+
+  theme_bw()
+
+corr_sum19b <- match_minis_cal_sum19b %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_sonde/do))
+
+
+
+
+
+
+
+#==========
+#========== 2019 summer corrections
+#==========
+
+# identify winter 2018 date/md
 sum19 <- meta %>%
   mutate(year  = year(date_in)) %>%
-  filter(year == 2019, calibrating == "y", site != "buck")
+  filter(year == 2019,
+         date_in %in% c(as.Date("2019-06-15"),as.Date("2019-06-16")) & date_out > "2019-06-16")
 
 
 
+# extract deployment data and correct
+mini_sum19 <- minidot %>%
+  inner_join(sum19) %>%
+  filter(date_time > date_in & date_time <= date_out) %>%
+  left_join(corr_sum19a %>%
+              bind_rows(corr_sum19b)) %>%
+  mutate(do_cor = corr*do) %>%
+  mutate(cal_group  = "jun19") %>%
+  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
 
 
+# Temp
+mini_sum19 %>%
+  ggplot(aes(date_time, temp, color = layer))+
+  facet_wrap(~site, nrow = 2)+
+  geom_line()+
+  theme_bw()
 
-
-
-
-
-
-
-
-
-
+# plot DO
+mini_sum19 %>%
+  ggplot(aes(date_time, do, color = layer))+
+  facet_wrap(~site, nrow = 2)+
+  geom_line()+
+  scale_color_manual(values=c("firebrick","dodgerblue"))+
+  theme_bw()
 
