@@ -77,9 +77,26 @@ plot_fn <- function(x){
 }
 
 # check plots and datetime ranges
-n = 10
+n = 1
 plot_fn(hobo_list[[n]])
+# hobo_list[[n]] %>%
+#   filter(datetime > "2019-07-01", datetime < "2019-07-10") %>%
+#   plot_fn()
 hobo_list[[n]]$datetime %>% min()
 hobo_list[[n]]$datetime %>% max()
 
+# read log file 
+hobo_log <- read_csv("hobo/hobo_log.csv") %>%
+  mutate(row = row_number())
 
+# combine log file with file names
+hobo_log_files <- tibble(name = list.files("hobo/raw") %>% 
+                          {substr(., 1, nchar(.) - 4)},
+                    name2 = name) %>%
+  separate(name2, c("site","layer","date_in","date_out","hobo_id"), sep = "_") %>%
+  mutate(date_in = parse_date(date_in, format = c("%d%b%Y")),
+         date_out = parse_date(date_out, format = c("%d%b%Y"))) %>%
+  full_join(hobo_log)
+
+# export
+write_csv(hobo_log_files, "hobo/hobo_log_files.csv")
