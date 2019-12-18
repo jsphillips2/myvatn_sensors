@@ -1,6 +1,3 @@
-#==========
-#========== Preliminaries
-#==========
 
 # load packages
 library(tidyverse)
@@ -21,14 +18,14 @@ hobo_list <- list.files("hobo/raw", full.names = T) %>%
     
     if(type == "txt") 
     { data = read_csv(x, skip = 2, col_names = F)
-      sn = {read_csv(x, skip = 1, col_names = F)[1, 3] %>%
-            str_split("SEN ") %>% unlist()}[2] %>% substr(6, nchar(.)-1)
+    sn = {read_csv(x, skip = 1, col_names = F)[1, 3] %>%
+        str_split("SEN ") %>% unlist()}[2] %>% substr(6, nchar(.)-1)
     } 
     
     if(type == "tsv") 
     { data = read_tsv(x, skip = 2, col_names = F)
-      sn = {read_tsv(x, skip = 1, col_names = F)[1, 3] %>%
-            str_split("SEN ") %>% unlist()}[2] %>% substr(6, nchar(.)-1)
+    sn = {read_tsv(x, skip = 1, col_names = F)[1, 3] %>%
+        str_split("SEN ") %>% unlist()}[2] %>% substr(6, nchar(.)-1)
     }
     
     data = data %>%
@@ -68,5 +65,21 @@ if(hobo_list[[32]]$flag[1] == "yes") {
 hobos = hobo_list %>%
   bind_rows() %>%
   arrange(datetime, name)
+
+plot_fn <- function(x){
+  x %>% 
+    gather(var, val, temp, lux) %>%
+    ggplot(aes(datetime, val))+
+    facet_wrap(~var, scales = "free_y", nrow = 2)+
+    geom_line()+
+    theme_bw()+
+    labs(title = x$name)
+}
+
+# check plots and datetime ranges
+n = 10
+plot_fn(hobo_list[[n]])
+hobo_list[[n]]$datetime %>% min()
+hobo_list[[n]]$datetime %>% max()
 
 
