@@ -45,7 +45,7 @@ minidot <- list.files("minidot/raw") %>%
   arrange(md, date_time)
 
 # import metadata
-meta <- read_csv("minidot/deployment_log22Nov19.csv", col_types = c("cccdDtDtddcdc"))
+meta <- read_csv("minidot/deployment_log21Feb20.csv", col_types = c("cccddDtDtddcdc"))
 
 # import sonde data
 sonde <- read_csv("sonde/sonde_clean.csv", col_types = c("Tdddddd"))
@@ -143,8 +143,6 @@ minidot17_correct %>%
   summarize(corr = mean(mean(do)/do))
 
 
-
-
 #==========
 #========== 2018 buckets
 #==========
@@ -161,6 +159,7 @@ buck_jun18 <- minidot %>%
                       date_in == "2018-06-10")) %>%
   filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out) %>%
   arrange(date_time)
+
 
 # plot
 buck_jun18 %>%
@@ -568,3 +567,26 @@ mini_sum19 %>%
   scale_color_manual(values=c("firebrick","dodgerblue"))+
   theme_bw()
 
+
+
+#=====Join all Files together=====
+mini_full1 <- minidot17_correct %>% #summer 2017
+  bind_rows(mini_win17 %>% #winter 2017-2018
+              bind_rows(mini_sum18 %>% #summer2018
+                          bind_rows(mini_win18 %>% #winter 2018-2019
+                                      bind_rows(mini_sum19)))) #summer 2019
+
+#create date_times for removing times out of water
+meta_full <- meta %>% 
+  mutate(date_time_in = as_datetime(paste(date_in, time_in)),
+         date_time_out = as_datetime(paste(date_out, time_out))) %>% 
+  rename(meta_flag = flag) 
+
+mini_full <- mini_full1 %>% 
+  inner_join(meta_full) %>% 
+  filter(date_time>=date_time_in &
+           date_time<=date_time_out)
+
+
+today <- format(Sys.Date(),  format = "%d%b%y")
+# write_csv(mini_full, paste0("minidot/clean/minidot_clean_", today, ".csv"))
