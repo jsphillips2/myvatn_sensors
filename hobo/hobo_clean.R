@@ -40,7 +40,7 @@ hobo_list <- list.files("hobo/raw", full.names = T) %>%
              sn = sn) %>%
       select(name, sn, datetime, temp, lux)
     
-    flag = if(min(apply(data, 2, flag_fn))== 0) "yes" else "no"
+    flag = if(min(apply(data, 2, flag_fn))< 2) "yes" else "no"
     
     data = data %>%
       mutate(flag = flag)
@@ -55,7 +55,7 @@ hobo_list %>% lapply(function(x){
   bind_rows() %>% 
   filter(flag == "yes")
 
-# fix file with missing temp
+# fix files with missing temp
 if(hobo_list[[32]]$flag[1] == "yes") {
   hobo_list[[32]] <- hobo_list[[32]] %>%
     select(-lux) %>%
@@ -63,10 +63,18 @@ if(hobo_list[[32]]$flag[1] == "yes") {
     mutate(flag = "no")
 }
 
+if(hobo_list[[33]]$flag[1] == "yes") {
+  hobo_list[[33]] <- hobo_list[[33]] %>%
+    select(-lux) %>%
+    rename(lux = temp) %>%
+    mutate(flag = "no")
+}
+
+#check lux class
 hobo_list %>% 
   lapply(function(x){class(x$lux)})
 
-hobo_list[[32]]
+
 # bind rows
 hobos = hobo_list %>%
   bind_rows() %>%
@@ -79,20 +87,55 @@ summary(hobos)
 hobo_meta <- read_csv("hobo/hobo_log.csv") 
 
 #read in trims
-hobo_trim <- read_csv("hobo/hobo_trim.csv")
+hobo_trim <- read_csv("hobo/hobo_trim.csv") %>% 
+  mutate(dttm_in = as_datetime(paste(date_in, time_in)),
+         dttm_out = as_datetime(paste(date_out, time_out)))
 
+#join hobo data with metadata
 hobos_full_raw <- hobos %>% 
   select(-flag) %>% 
   full_join(hobo_meta %>% 
               select(-contains("date")), by = "name")
 
-hobos_full_raw %>% 
+#trim hobo data to appropriate times
+hobos_full <- hobos_full_raw %>% 
+  full_join(hobo_trim) %>% 
+  filter(datetime>=dttm_in,
+         datetime<=dttm_out)
+
+#check all metadata accounted for
+hobo_meta %>% 
+  select(-contains("date")) %>% 
   full_join(hobo_trim) %>% 
   filter(is.na(site)) %>% 
   select(name) %>% 
   unique()
 
+hobos_full%>% 
+  filter(is.na(site)) %>% 
+  select(name) %>% 
+  unique()
+
+#check that all years accounted for and numbers make sense
+hobos_full %>% count(year(datetime))
 
 
-full_join(hobo_trim, hobo_meta %>% select(-contains("date")))
+#plot to confirm
+hobos_full %>% 
+  ggplot(aes(x = datetime, y = temp, col = layer, group = date_in))+
+  geom_line()+
+  facet_wrap(~site, scales = "free")
 
+
+hobos_full %>% 
+  ggplot(aes(x = datetime, y = lux, col = layer, group = date_in))+
+  geom_line()+
+  facet_wrap(~site, scales = "free")
+
+hobos_full %>% 
+  ggplot(aes(x = lux, y = temp, col = layer))+
+  geom_point(alpha = 0.2)+
+  geom_smooth(method = "lm")
+
+today <- format(Sys.Date(),  format = "%d%b%y")
+# write_csv(hobos_full, paste0("hobo/clean/hobo_clean_", today, ".csv"))

@@ -1,43 +1,44 @@
-name,site,layer,date_in,date_out,hobo_id,sensor_depth,site_depth,acryllic,flag,comments
-cs_ben_20Aug2018_04Jun2019_A,cs,ben,2018-08-20,2019-06-04,A,NA,NA,n,1,hobo affixed to top of rack
-cs_ben_20Aug2018_04Jun2019_B,cs,ben,2018-08-20,2019-06-04,B,NA,NA,n,1,hobo affixed to top of rack
-e1_ben_22Aug2017_29May2018_A,e1,ben,2017-08-22,2018-05-29,A,NA,2.7,NA,1,hobo attached gray box?
-e1_ben_22Aug2017_29May2018_B,e1,ben,2017-08-22,2018-05-29,B,NA,2.7,NA,1,hobo attached gray box?
+﻿name,site,layer,date_in,date_out,hobo_id,sensor_depth,site_depth,acryllic,flag,comments
+cs_ben_20Aug2018_04Jun2019_A,cs,ben,2018-08-20,2019-06-04,A,,,n,1,hobo affixed to top of rack
+cs_ben_20Aug2018_04Jun2019_B,cs,ben,2018-08-20,2019-06-04,B,,,n,1,hobo affixed to top of rack
+e1_ben_22Aug2017_29May2018_A,e1,ben,2017-08-22,2018-05-29,A,,2.7,,1,hobo attached gray box?
+e1_ben_22Aug2017_29May2018_B,e1,ben,2017-08-22,2018-05-29,B,,2.7,,1,hobo attached gray box?
 e1_ben_20Aug2018_04Jun2019_A,e1,ben,2018-08-20,2019-06-04,A,2.2,2.7,n,0,hobo affixed to top of rack
 e1_ben_20Aug2018_04Jun2019_B,e1,ben,2018-08-20,2019-06-04,B,2.2,2.7,n,0,hobo affixed to top of rack
 e5_ben_20Aug2018_03Jun2019_B,e5,ben,2018-08-20,2019-06-03,B,2,2.5,n,0,hobo affixed to top of rack
 e5_ben_20Aug2018_04Jun2019_A,e5,ben,2018-08-20,2019-06-04,A,2,2.5,n,0,hobo affixed to top of rack
-e5_ben_13Jun2019_15Aug2019,e5,ben,2019-06-13,2019-08-15,"NA",2,2.5,n,0,hobo affixed to top of rack
-e5_pel_13Jun2019_15Aug2019,e5,pel,2019-06-13,2019-08-15,"NA",1,2.5,y,0,hobo in tube on cord
-grim_ben_13Jun2018_18Jul2018,grim,ben,2018-06-13,2018-07-18,"NA",5.1,5.1,y,0,hobo attached to base of minidot rack
-grim_ben_17Jul2018_16Aug2018,grim,ben,2018-07-17,2018-08-16,"NA",5.1,5.1,y,0,hobo attached to base of minidot rack
-grim_ben_16Jun2019_15Aug2019,grim,ben,2019-06-16,2019-08-15,"NA",6,6.5,n,0,hobo affixed to top of rack
-grim_pel_13Jun2018_18Jul2018,grim,pel,2018-06-13,2018-07-18,"NA",1,5.1,y,0,hobo in tube on cord
-grim_pel_17Jul2018_16Aug2018,grim,pel,2018-07-17,2018-08-16,"NA",1,5.1,y,0,hobo in tube on cord
-grim_pel_16Jun2019_15Aug2019,grim,pel,2019-06-16,2019-08-15,"NA",1,6.5,y,0,hobo in tube on cord
-reyk_ben_13Jun2018_18Jul2018,reyk,ben,2018-06-13,2018-07-18,"NA",4.25,4.25,y,0,hobo attached to base of minidot rack
-reyk_ben_17Jul2018_16Aug2018,reyk,ben,2018-07-17,2018-08-16,"NA",4.25,4.25,y,0,hobo attached to base of minidot rack
+e5_ben_13Jun2019_15Aug2019,e5,ben,2019-06-13,2019-08-15,NA,2,2.5,n,0,hobo affixed to top of rack
+e5_pel_13Jun2019_15Aug2019,e5,pel,2019-06-13,2019-08-15,NA,1,2.5,y,0,hobo in tube on cord
+grim_ben_13Jun2018_18Jul2018,grim,ben,2018-06-13,2018-07-18,NA,5.1,5.1,y,0,hobo attached to base of minidot rack
+grim_ben_17Jul2018_16Aug2018,grim,ben,2018-07-17,2018-08-16,NA,5.1,5.1,y,0,hobo attached to base of minidot rack
+grim_ben_16Jun2019_15Aug2019,grim,ben,2019-06-16,2019-08-15,NA,6,6.5,n,0,hobo affixed to top of rack
+grim_pel_13Jun2018_18Jul2018,grim,pel,2018-06-13,2018-07-18,NA,1,5.1,y,0,hobo in tube on cord
+grim_pel_17Jul2018_16Aug2018,grim,pel,2018-07-17,2018-08-16,NA,1,5.1,y,0,hobo in tube on cord
+grim_pel_16Jun2019_15Aug2019,grim,pel,2019-06-16,2019-08-15,NA,1,6.5,y,0,hobo in tube on cord
+reyk_ben_13Jun2018_18Jul2018,reyk,ben,2018-06-13,2018-07-18,NA,4.25,4.25,y,0,hobo attached to base of minidot rack
+reyk_ben_17Jul2018_16Aug2018,reyk,ben,2018-07-17,2018-08-16,NA,4.25,4.25,y,0,hobo attached to base of minidot rack
 reyk_ben_20Aug2018_04Jun2019_A,reyk,ben,2018-08-20,2019-06-04,A,3.8,4.3,n,1,rack covered in macrophytes when retrieved; hobo affixed to top of rack
 reyk_ben_20Aug2018_04Jun2019_B,reyk,ben,2018-08-20,2019-06-04,B,3.8,4.3,n,1,rack covered in macrophytes when retrieved; hobo affixed to top of rack
-reyk_ben_16Jun2019_15Aug2019,reyk,ben,2019-06-16,2019-08-15,"NA",3.8,4.3,n,0,hobo affixed to top of rack
-reyk_pel_13Jun2018_18Jul2018,reyk,pel,2018-06-13,2018-07-18,"NA",1,4.25,y,0,hobo in tube on cord
-reyk_pel_17Jul2018_16Aug2018,reyk,pel,2018-07-17,2018-08-16,"NA",1,4.25,y,0,hobo in tube on cord
-reyk_pel_16Jun2019_15Aug2019,reyk,pel,2019-06-16,2019-08-15,"NA",1,4.3,y,0,hobo in tube on cord
-st33_ben_22Aug2017_29May2018_B,st33,ben,2017-08-22,2018-05-29,B,NA,3.3,NA,1,hobo attached gray box?
-st33_ben_22Aug2017_31May2018_A,st33,ben,2017-08-22,2018-05-31,A,NA,3.3,NA,1,hobo attached gray box?
-st33_ben_13Jun2018_16Aug2018,st33,ben,2018-06-13,2018-08-16,"NA",3.3,3.3,y,0,hobo attached to base of minidot rack
+reyk_ben_16Jun2019_15Aug2019,reyk,ben,2019-06-16,2019-08-15,NA,3.8,4.3,n,0,hobo affixed to top of rack
+reyk_pel_13Jun2018_18Jul2018,reyk,pel,2018-06-13,2018-07-18,NA,1,4.25,y,0,hobo in tube on cord
+reyk_pel_17Jul2018_16Aug2018,reyk,pel,2018-07-17,2018-08-16,NA,1,4.25,y,0,hobo in tube on cord
+reyk_pel_16Jun2019_15Aug2019,reyk,pel,2019-06-16,2019-08-15,NA,1,4.3,y,0,hobo in tube on cord
+st33_ben_22Aug2017_29May2018_B,st33,ben,2017-08-22,2018-05-29,B,,3.3,,1,hobo attached gray box?
+st33_ben_22Aug2017_31May2018_A,st33,ben,2017-08-22,2018-05-31,A,,3.3,,1,hobo attached gray box?
+st33_ben_13Jun2018_16Aug2018,st33,ben,2018-06-13,2018-08-16,NA,3.3,3.3,y,0,hobo attached to base of minidot rack
 st33_ben_20Aug2018_04Jun2019_A,st33,ben,2018-08-20,2019-06-04,A,2.8,3.3,n,0,hobo affixed to top of rack
 st33_ben_20Aug2018_04Jun2019_B,st33,ben,2018-08-20,2019-06-04,B,2.8,3.3,n,0,hobo affixed to top of rack
-st33_ben_13Jun2019_15Aug2019,st33,ben,2019-06-13,2019-08-15,"NA",2.8,3.3,n,0,hobo affixed to top of rack
-st33_out_13May2013_21Aug2013,st33,out,2013-05-13,2013-08-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_24May2015_15Jul2015,st33,out,2015-05-24,2015-07-15,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_11Jul2015_21Aug2015,st33,out,2015-07-11,2015-08-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_25May2017_17Jul2017,st33,out,2017-05-25,2017-07-17,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_17Jul2017_20Aug2017,st33,out,2017-07-17,2017-08-20,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_20Aug2017_05Oct2017,st33,out,2017-08-20,2017-10-05,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_21May2018_21Jul2018,st33,out,2018-05-21,2018-07-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_21Jul2018_18Aug2018,st33,out,2018-07-21,2018-08-18,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_31May2019_23Jul2019,st33,out,2019-05-31,2019-07-23,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_22Jul2019_15Aug2019,st33,out,2019-07-22,2019-08-15,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_pel_13Jun2018_16Aug2018,st33,pel,2018-06-13,2018-08-16,"NA",1,3.3,y,0,hobo in tube on cord
-st33_out_27May2016_21Jul2016,st33,out,2016-05-27,2016-07-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_ben_13Jun2019_15Aug2019,st33,ben,2019-06-13,2019-08-15,NA,2.8,3.3,n,0,hobo affixed to top of rack
+st33_out_13May2013_21Aug2013,st33,out,2013-05-13,2013-08-21,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_24May2015_15Jul2015,st33,out,2015-05-24,2015-07-15,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_11Jul2015_21Aug2015,st33,out,2015-07-11,2015-08-21,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_25May2017_17Jul2017,st33,out,2017-05-25,2017-07-17,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_17Jul2017_20Aug2017,st33,out,2017-07-17,2017-08-20,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_20Aug2017_05Oct2017,st33,out,2017-08-20,2017-10-05,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_21May2018_21Jul2018,st33,out,2018-05-21,2018-07-21,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_21Jul2018_18Aug2018,st33,out,2018-07-21,2018-08-18,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_31May2019_23Jul2019,st33,out,2019-05-31,2019-07-23,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_22Jul2019_15Aug2019,st33,out,2019-07-22,2019-08-15,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_pel_13Jun2018_16Aug2018,st33,pel,2018-06-13,2018-08-16,NA,1,3.3,y,0,hobo in tube on cord
+st33_out_27May2016_21Jul2016,st33,out,2016-05-27,2016-07-21,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
+st33_out_08Jun2014_19Aug2014,st33,out,2014-05-08,2014-08-19,NA,-1,3.3,n,0,hobo attached to top of sonde buoy
