@@ -35,6 +35,8 @@ hobo_list <- list.files("hobo/raw", full.names = T) %>%
                parse_date_time(datetime, orders = 
                                  c("mdy HMS","mdy HM", "mdY HMS", "mdY HM")),
              name = str_remove(x, "hobo/raw/"),
+             name = str_remove(name, ".txt"),
+             name = str_remove(name, ".tsv"),
              sn = sn) %>%
       select(name, sn, datetime, temp, lux)
     
@@ -61,49 +63,36 @@ if(hobo_list[[32]]$flag[1] == "yes") {
     mutate(flag = "no")
 }
 
-# read log file 
-# hobo_log <- read_csv("hobo/hobo_log.csv") %>%
-#   mutate(row = row_number())
+hobo_list %>% 
+  lapply(function(x){class(x$lux)})
 
-# combine log file with file names
-# hobo_log_files <- tibble(name = list.files("hobo/raw") %>% 
-#                           {substr(., 1, nchar(.) - 4)},
-#                     name2 = name) %>%
-#   separate(name2, c("site","layer","date_in","date_out","hobo_id"), sep = "_") %>%
-#   mutate(date_in = parse_date(date_in, format = c("%d%b%Y")),
-#          date_out = parse_date(date_out, format = c("%d%b%Y"))) %>%
-#   full_join(hobo_log)
-
-# export
-# write_csv(hobo_log_files, "hobo/hobo_log_files.csv")
-
-hobo_log_files <- read_csv("hobo/hobo_log_files.csv") %>%
-  select(-time_in, -time_out)
-
-
+hobo_list[[32]]
 # bind rows
 hobos = hobo_list %>%
   bind_rows() %>%
-  arrange(datetime, name)
+  arrange(datetime, name) 
+  
 
-plot_fn <- function(x){
-  x %>% 
-    gather(var, val, temp, lux) %>%
-    ggplot(aes(datetime, val))+
-    facet_wrap(~var, scales = "free_y", nrow = 2)+
-    geom_line()+
-    theme_bw()+
-    labs(title = x$name)
-}
+summary(hobos)
+
+#read in meta data
+hobo_meta <- read_csv("hobo/hobo_log.csv") 
+
+#read in trims
+hobo_trim <- read_csv("hobo/hobo_trim.csv")
+
+hobos_full_raw <- hobos %>% 
+  select(-flag) %>% 
+  full_join(hobo_meta %>% 
+              select(-contains("date")), by = "name")
+
+hobos_full_raw %>% 
+  full_join(hobo_trim) %>% 
+  filter(is.na(site)) %>% 
+  select(name) %>% 
+  unique()
 
 
-# check plots and datetime ranges
-n = 31
-plot_fn(hobo_list[[n]])
-# hobo_list[[n]] %>%
-#   filter(datetime > "2019-07-01", datetime < "2019-07-10") %>%
-#   plot_fn()
-hobo_list[[n]]$datetime %>% min()
-hobo_list[[n]]$datetime %>% max()
 
+full_join(hobo_trim, hobo_meta %>% select(-contains("date")))
 
