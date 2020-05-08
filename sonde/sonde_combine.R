@@ -69,7 +69,7 @@ sonde <- list.files("sonde/raw") %>%
     temp_k = temp + 273.15,
     # Schmidt number and associated conversion from CO2 to O2
     # based on Wanninkhoff 1992; Holtgrieve et al 2010; Staehr
-    sch_o2 = 1800.6 + 120.10*temp + 3.7818*temp^2 - 0.047608*temp^3,
+    sch_o2 = 1800.6 - 120.10*temp + 3.7818*temp^2 - 0.047608*temp^3,
     sch_conv = (sch_o2/600)^(-0.5),
     # O2 solubility in mL/L
     # based on Weiss 1970
