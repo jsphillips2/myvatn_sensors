@@ -128,7 +128,7 @@ minidot17_correct <- minidot %>%
   arrange(date_time) %>%
   mutate(do_cor = cal_data17$corr*do,
          cal_group = "summer17") %>%
-  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
 # examine
@@ -230,7 +230,7 @@ mini_win17 <- minidot %>%
   left_join(corr_jun18) %>%
   mutate(do_cor = corr*do) %>%
   mutate(cal_group  = "june18") %>%
-  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
 # plot
@@ -264,7 +264,7 @@ mini_sum18 <- minidot %>%
   left_join(corr_jun18) %>%
   mutate(do_cor = corr*do) %>%
   mutate(cal_group  = "june18") %>%
-  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
 # plot
@@ -296,7 +296,7 @@ mini_win18 <- minidot %>%
   left_join(corr_aug18) %>%
   mutate(do_cor = corr*do) %>%
   mutate(cal_group  = "aug18") %>%
-  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
 # Temp
@@ -548,7 +548,7 @@ mini_sum19 <- minidot %>%
               bind_rows(corr_sum19b)) %>%
   mutate(do_cor = corr*do) %>%
   mutate(cal_group  = "jun19") %>%
-  select(site, lat, lon, layer, depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
 
@@ -587,6 +587,11 @@ mini_full <- mini_full1 %>%
   filter(date_time>=date_time_in &
            date_time<=date_time_out)
 
+#plot to confirm
+mini_full %>% 
+  ggplot(aes(x = date_time, y = do_cor))+
+  facet_grid(site~layer)+
+  geom_line()
 
 today <- format(Sys.Date(),  format = "%d%b%y")
 # write_csv(mini_full, paste0("minidot/clean/minidot_clean_", today, ".csv"))
