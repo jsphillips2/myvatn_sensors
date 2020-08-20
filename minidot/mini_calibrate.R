@@ -45,7 +45,7 @@ minidot <- list.files("minidot/raw") %>%
   arrange(md, date_time)
 
 # import metadata
-meta <- read_csv("minidot/deployment_log21Feb20.csv", col_types = c("cccddDtDtddcdc"))
+meta <- read_csv("minidot/deployment_log.csv", col_types = c("cccddDtDtddcdc"))
 
 # import sonde data
 sonde <- read_csv("sonde/sonde_clean.csv", col_types = c("Tdddddd"))
@@ -567,6 +567,73 @@ mini_sum19 %>%
   scale_color_manual(values=c("firebrick","dodgerblue"))+
   theme_bw()
 
+#====Winter 2019 Corrections=====
+
+# extract minidots that were deployed over winter 2019-2020
+cal_win19 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2019, 
+         calibrating == "y", 
+         site == "buck",
+         date_in == "2019-08-16")
+
+# extract minidot data from calibration
+mini_cal_win19 <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_win19) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# plot data
+mini_cal_win19 %>% 
+  select(md, date_time, do, do_sat, temp) %>% 
+  gather(var, val, do, do_sat, temp) %>% 
+  ggplot(aes(x = date_time, y = val, col = md))+
+  facet_wrap(~var, ncol = 1, scales = "free")+
+  geom_line()+
+  theme_bw()
+
+
+#minidot 8 needs increase in time by 30 min
+
+
+#find time with relatively low change in temp
+mini_cal_win19 %>% 
+  mutate(date_time  = if_else(md == "md8", date_time+30*60, date_time)) %>% 
+  filter(date_time>"2019-08-16 19:00:00" & date_time<= "2019-08-17 06:00:00") %>%
+  select(md, date_time, do, do_sat, temp) %>% 
+  gather(var, val, do, do_sat, temp) %>% 
+  ggplot(aes(x = date_time, y = val, col = md))+
+  facet_wrap(~var, ncol = 1, scales = "free")+
+  geom_line()+
+  theme_bw()
+
+corr_aug19 <- mini_cal_win19 %>%
+  mutate(date_time  = if_else(md == "md8", date_time+30*60, date_time)) %>% 
+  filter(date_time>"2019-08-16 19:00:00" & date_time<= "2019-08-17 06:00:00") %>%
+  mutate(do_mean = mean(do)) %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_mean/do))
+
+# correct miniwin19
+miniwin19<- minidot %>%
+  mutate(year  = year(date_time),
+         date = date(date_time)) %>%
+  inner_join(meta %>%
+               filter(date_in == "2019-08-20"))  %>%
+  filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
+  arrange(date_time) %>%
+  full_join(corr_aug19) %>% 
+  mutate(do_cor = corr*do,
+         cal_group = "aug20") %>%
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+# examine
+miniwin19 %>%
+  ggplot(aes(date_time, do))+
+  geom_line(size = 0.8)+
+  geom_line(aes(y = do_cor), color = "red", size = 0.8, alpha = 0.5)+
+  theme_bw()
 
 
 #=====Join all Files together=====
@@ -574,7 +641,8 @@ mini_full1 <- minidot17_correct %>% #summer 2017
   bind_rows(mini_win17 %>% #winter 2017-2018
               bind_rows(mini_sum18 %>% #summer2018
                           bind_rows(mini_win18 %>% #winter 2018-2019
-                                      bind_rows(mini_sum19)))) #summer 2019
+                                      bind_rows(mini_sum19 %>% #summer 2019
+                                                  bind_rows(miniwin19))))) #winter 2019-2020
 
 #create date_times for removing times out of water
 meta_full <- meta %>% 
