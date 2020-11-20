@@ -42,7 +42,7 @@ sonde <- list.files("sonde/raw") %>%
     x_csv = str_c(x_clean, collapse = "\n") %>% read_csv() %>% # create csv
       mutate(Date_Time = ymd_hms(paste(mdy(Date), Time))) # create date time
     
-    if (year %in% c("2014","2015","2016","2017","2018","2019")) {
+    if (year %in% c("2014","2015","2016","2017","2018","2019", "2020")) {
       x_csv = x_csv %>% rename(turbsc = TurbSC_1) # rename TurbSC_1
     }
     

@@ -575,7 +575,7 @@ cal_win19 <- meta %>%
   filter(year == 2019, 
          calibrating == "y", 
          site == "buck",
-         date_in == "2019-08-16")
+         date_in %in% c("2019-08-16"))
 
 # extract minidot data from calibration
 mini_cal_win19 <- minidot %>%
@@ -619,12 +619,12 @@ miniwin19<- minidot %>%
   mutate(year  = year(date_time),
          date = date(date_time)) %>%
   inner_join(meta %>%
-               filter(date_in == "2019-08-20"))  %>%
+               filter(date_in%in% c(as.Date("2019-08-20"), as.Date("2019-09-01"))))  %>%
   filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
   arrange(date_time) %>%
   full_join(corr_aug19) %>% 
   mutate(do_cor = corr*do,
-         cal_group = "aug20") %>%
+         cal_group = "aug19") %>%
   select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
          cal_group, flag)
 
@@ -888,3 +888,9 @@ mini_full %>%
 
 today <- format(Sys.Date(),  format = "%d%b%y")
 # write_csv(mini_full, paste0("minidot/clean/minidot_clean_", today, ".csv"))
+
+
+mini_full %>% filter(cal_group == "aug20") %>% 
+  ggplot(aes(x = date_time, y = do_cor))+
+  facet_wrap(~site)+
+  geom_line()
