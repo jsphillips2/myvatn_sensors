@@ -70,6 +70,13 @@ if(hobo_list[[33]]$flag[1] == "yes") {
     mutate(flag = "no")
 }
 
+if(hobo_list[[50]]$flag[1] == "yes") {
+  hobo_list[[50]] <- hobo_list[[50]] %>%
+    select(-lux) %>%
+    rename(lux = temp) %>%
+    mutate(flag = "no")
+}
+
 #check lux class
 hobo_list %>% 
   lapply(function(x){class(x$lux)})
@@ -136,6 +143,29 @@ hobos_full %>%
   ggplot(aes(x = lux, y = temp, col = layer))+
   geom_point(alpha = 0.2)+
   geom_smooth(method = "lm")
+
+
+
+hobos_full %>% 
+  filter(layer == "ben", !is.na(hobo_id), date_in %in% c(as.Date("2019-09-01"), as.Date("2019-08-20"))) %>% 
+  ggplot(aes(x = datetime, y = temp, col = sensor_depth, group = interaction(hobo_id,date_in)))+
+  facet_wrap(~site)+
+  geom_line()+
+  scale_y_log10()+
+  scale_color_viridis_c(trans = "log1p", direction = -1)
+
+
+#probably needs more attention than this, but ... 
+# hobos_full %>% 
+#   filter(layer == "ben", !is.na(hobo_id), date_in %in% c(as.Date("2019-09-01"), as.Date("2019-08-20"))) %>% 
+#   group_by(site, date = as.Date(datetime), hour = hour(datetime), sensor_depth) %>% 
+#   summarise(temp = mean(temp)) %>% 
+#   group_by(site, date, hour) %>% 
+#   summarise(thermo.depth = rLakeAnalyzer::thermo.depth(depths = sensor_depth, temp)) %>% 
+#   ggplot(aes(x = date, y = thermo.depth))+
+#   facet_wrap(~site)+
+#   geom_line()+
+#   scale_y_reverse()
 
 today <- format(Sys.Date(),  format = "%d%b%y")
 # write_csv(hobos_full, paste0("hobo/clean/hobo_clean_", today, ".csv"))

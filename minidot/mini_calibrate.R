@@ -636,13 +636,233 @@ miniwin19 %>%
   theme_bw()
 
 
+#=====Summer 2020 corrections=====
+
+
+
+
+# identify summer 2020 date/md
+cal_sum20a <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2020, calibrating == "y", site != "buck",
+         date_in == "2020-07-26")
+
+
+
+# extract sonde data
+sonde_cal_sum20a <- sonde %>%
+  mutate(year  = year(date_time)) %>%
+  filter(as.Date(date_time) >= unique(cal_sum20a$date_in) & as.Date(date_time) <= unique(cal_sum20a$date_out))
+
+# extract minidot data
+mini_cal_sum20a <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_sum20a) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# plot temp
+#find times
+starttime <- as_datetime("2020-07-26 12:00:00")
+endtime <- as_datetime("2020-07-28 12:00:00")
+
+#check
+sonde_cal_sum20a %>%
+  select(date_time,  temp) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum20a %>%
+              select(md, date_time,  temp)) %>%
+  ggplot(aes(date_time,  temp, color  = md))+
+  geom_line()+
+  geom_vline(xintercept = starttime)+
+  geom_vline(xintercept = endtime)+
+  theme_bw()
+
+#plot temp
+sonde_cal_sum20a %>%
+  filter(date_time >= starttime& date_time <= endtime) %>%
+  select(date_time,  temp) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum20a %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(md, date_time,  temp)) %>%
+  ggplot(aes(date_time,  temp, color  = md))+
+  geom_line()+
+  theme_bw()
+
+# plot do
+sonde_cal_sum20a %>%
+  filter(date_time >= starttime& date_time <= endtime) %>%
+  select(date_time,  do) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum20a %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(md, date_time,  do)) %>%
+  ggplot(aes(date_time,  do, color  = md))+
+  geom_line()+
+  theme_bw()
+
+mini_cal_sum20a %>%
+  filter(date_time >= starttime & date_time <= endtime) %>%
+  select(md, date_time,  do) %>%
+  mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+  group_by(md, date_time) %>%
+  summarize(do = mean(do)) %>%
+  full_join(sonde_cal_sum20a %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(date_time,  do) %>%
+              mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+              group_by(date_time) %>%
+              summarize(do_sonde = mean(do))) %>%
+  group_by(md) %>%
+  filter(!is.na(do_sonde)) %>% 
+  summarize(corr = mean(do_sonde/do))
+
+match_minis_cal_sum20a <- mini_cal_sum20a %>%
+  filter(date_time >= starttime & date_time <= endtime) %>%
+  select(md, date_time,  do) %>%
+  mutate(hour  = round_date(date_time, unit = "hour")) %>%
+  left_join(sonde_cal_sum20a %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(date_time,  do) %>%
+              mutate(hour  = round_date(date_time, unit = "hour")) %>%
+              rename(date_time_sonde = date_time,
+                     do_sonde = do)) %>%
+  mutate(dist = abs(date_time_sonde - date_time)) %>%
+  group_by(md, hour) %>%
+  filter(dist == min(dist)) %>%
+  filter(date_time == min(date_time)) %>%
+  ungroup() %>%
+  select(md, hour, date_time, do, do_sonde) 
+
+match_minis_cal_sum20a %>%
+  gather(var, val, do, do_sonde) %>%
+  mutate(md = ifelse(var == "do_sonde","sonde",md)) %>%
+  ggplot(aes(date_time,  val, color  = md))+
+  geom_point()+
+  geom_line()+
+  geom_line(aes(group = hour), color = "black")+
+  theme_bw()
+
+corr_sum20a <- match_minis_cal_sum20a %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_sonde/do))
+
+# identify summmer 2020 date/md
+sum20 <- meta %>%
+  mutate(year  = year(date_in),
+         dttm_in = as.POSIXct(paste(date_in, time_in), format="%Y-%m-%d %H:%M:%S"),
+         dttm_out = as.POSIXct(paste(date_out, time_out), format="%Y-%m-%d %H:%M:%S")) %>% 
+  filter(year == 2020,
+         date_in %in% c(as.Date("2020-07-28"),as.Date("2020-07-29")))
+
+
+
+# extract deployment data and correct
+mini_sum20 <- minidot %>%
+  inner_join(sum20) %>%
+  filter(date_time > dttm_in & date_time <= dttm_out) %>%
+  left_join(corr_sum20a) %>%
+  mutate(do_cor = corr*do) %>%
+  mutate(cal_group  = "jul20") %>%
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+
+# Temp
+mini_sum20 %>%
+  ggplot(aes(date_time, temp, color = layer))+
+  facet_wrap(~site, nrow = 2)+
+  geom_line()+
+  theme_bw()
+
+# plot DO
+mini_sum20 %>%
+  ggplot(aes(date_time, do, color = layer))+
+  facet_wrap(~site, nrow = 2)+
+  geom_line()+
+  scale_color_manual(values=c("firebrick","dodgerblue"))+
+  theme_bw()
+
+
+#====Winter 2020 corrections====
+
+# extract minidots that were deployed over winter 2019-2020
+cal_win20 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2020, 
+         calibrating == "y", 
+         site == "buck",
+         date_in == "2020-08-29")
+
+# extract minidot data from calibration
+mini_cal_win20 <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_win20) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# plot data
+mini_cal_win20 %>% 
+  select(md, date_time, do, do_sat, temp) %>% 
+  gather(var, val, do, do_sat, temp) %>% 
+  ggplot(aes(x = date_time, y = val, col = md))+
+  facet_wrap(~var, ncol = 1, scales = "free")+
+  geom_line()+
+  theme_bw()
+
+
+#minidot 8 needs increase in time by 30 min
+
+
+#find time with relatively low change in temp
+starttime <- "2020-08-29 23:00:00"
+endtime <- "2020-09-01 8:00:00"
+
+mini_cal_win20 %>% 
+  filter(date_time>starttime& date_time<= endtime) %>%
+  select(md, date_time, do, do_sat, temp) %>% 
+  gather(var, val, do, do_sat, temp) %>% 
+  ggplot(aes(x = date_time, y = val, col = md))+
+  facet_wrap(~var, ncol = 1, scales = "free")+
+  geom_line()+
+  theme_bw()
+
+corr_aug20 <- mini_cal_win20 %>%
+  filter(date_time>starttime& date_time<= endtime) %>%
+  mutate(do_mean = mean(do)) %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_mean/do))
+
+# correct miniwin20
+miniwin20<- minidot %>%
+  mutate(year  = year(date_time),
+         date = date(date_time)) %>%
+  inner_join(meta %>%
+               filter(date_in == "2019-09-05"))  %>%
+  filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
+  arrange(date_time) %>%
+  full_join(corr_aug19) %>% 
+  mutate(do_cor = corr*do,
+         cal_group = "aug20") %>%
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+# examine
+miniwin20 %>%
+  ggplot(aes(date_time, do))+
+  geom_line(size = 0.8)+
+  geom_line(aes(y = do_cor), color = "red", size = 0.8, alpha = 0.5)+
+  theme_bw()
+
+
+
 #=====Join all Files together=====
 mini_full1 <- minidot17_correct %>% #summer 2017
   bind_rows(mini_win17 %>% #winter 2017-2018
               bind_rows(mini_sum18 %>% #summer2018
                           bind_rows(mini_win18 %>% #winter 2018-2019
                                       bind_rows(mini_sum19 %>% #summer 2019
-                                                  bind_rows(miniwin19))))) #winter 2019-2020
+                                                  bind_rows(miniwin19 %>% #winter 2019-2020
+                                                              bind_rows(mini_sum20)))))) #summer 2020
 
 #create date_times for removing times out of water
 meta_full <- meta %>% 
@@ -657,8 +877,13 @@ mini_full <- mini_full1 %>%
 
 #plot to confirm
 mini_full %>% 
-  ggplot(aes(x = date_time, y = do_cor))+
-  facet_grid(site~layer)+
+  ggplot(aes(x = date_time, y = do_cor, group = cal_group))+
+  facet_grid(site~layer, scales = "free_x")+
+  geom_line()
+
+mini_full %>% 
+  ggplot(aes(x = date_time, y = do_cor, col = layer, group = cal_group))+
+  facet_wrap(~site, scales = "free_x")+
   geom_line()
 
 today <- format(Sys.Date(),  format = "%d%b%y")

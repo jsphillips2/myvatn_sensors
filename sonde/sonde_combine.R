@@ -23,7 +23,7 @@ sonde <- list.files("sonde/raw") %>%
     if(year %in% c("2013")) {
       lines = c(-2)
     }
-    if(year %in% c("2014","2015","2016","2017","2018","2019")) {
+    if(year %in% c("2014","2015","2016","2017","2018","2019", "2020")) {
       lines = c(-1:-12, -14:-15)
     }
     
@@ -82,8 +82,37 @@ sonde <- list.files("sonde/raw") %>%
     do_eq = 32*(98*do_sol)/(8.3144598*temp_k)
   )
 
+sonde_trim <- read_csv("sonde/sonde_trim.csv") 
+
+sonde_trim <- sonde_trim %>% 
+  mutate(dttm_in = as.POSIXct(paste(date_in, time_in), format="%Y-%m-%d %H:%M:%S"),
+         dttm_out = as.POSIXct(paste(date_out, time_out), format="%Y-%m-%d %H:%M:%S"))
+
+
+sonde_trimmed <- sonde %>% 
+  crossing(sonde_trim) %>% 
+  filter(date_time>dttm_in,
+         date_time<dttm_out)
+
+#plot
+sonde_trimmed %>% 
+  group_by(as.Date(date_time)) %>% 
+  mutate(mean = mean(do),
+         sd = sd(do)) %>% 
+  filter(!is.na(date_time),
+         do<mean+2*sd,
+         do>mean-2*sd,
+         do!=0) %>% 
+  mutate(year = year(date_time)) %>% 
+  filter(year!=2014) %>% 
+  ggplot(aes(y = do, x = date_time, group = dttm_in))+
+  facet_wrap(~year, scales = "free_x")+
+  geom_line()
+
+
+
 # export
-# write_csv(sonde, "sonde/sonde_clean.csv")
+# write_csv(sonde_trimmed, "sonde/sonde_clean.csv")
 
 
 
