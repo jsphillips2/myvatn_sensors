@@ -55,7 +55,7 @@ sonde <- read_csv("sonde/sonde_clean.csv", col_types = c("Tdddddd"))
 
 
 #==========
-#========== Summer 2017
+#========== Summer 2017====
 #==========
 
 # identify calibration date/md
@@ -123,7 +123,7 @@ minidot17_correct <- minidot %>%
          date = date(date_time)) %>%
   inner_join(meta %>%
                mutate(year  = year(date_in)) %>%
-               filter(year == 2017, date_in == "2017-06-30"))  %>%
+               filter(year == 2017, date_in %in% c(as.Date("2017-06-30"), as.Date("2017-07-13"))))  %>% 
   filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
   arrange(date_time) %>%
   mutate(do_cor = cal_data17$corr*do,
@@ -144,7 +144,7 @@ minidot17_correct %>%
 
 
 #==========
-#========== 2018 buckets
+#========== 2018 buckets=====
 #==========
 
 #### June
@@ -213,7 +213,7 @@ corr_aug18 <- buck_aug18 %>%
 
 
 #==========
-#========== 2017 winter correction
+#========== 2017 winter correction====
 #==========
 
 
@@ -890,7 +890,18 @@ today <- format(Sys.Date(),  format = "%d%b%y")
 # write_csv(mini_full, paste0("minidot/clean/minidot_clean_", today, ".csv"))
 
 
-mini_full %>% filter(cal_group == "aug20") %>% 
-  ggplot(aes(x = date_time, y = do_cor))+
-  facet_wrap(~site)+
-  geom_line()
+#====Explore some of the corrections====
+
+corr <- bind_rows(corr_aug18 %>% mutate(group = "aug18"),  corr_aug19 %>% mutate(group = "aug19") %>% 
+            bind_rows(corr_aug20 %>% mutate(group = "aug20") %>% 
+                        bind_rows(corr_jun18 %>% mutate(group = "jun18") %>% 
+                                    bind_rows(corr_sum19a %>% mutate(group = "sum19") %>% 
+                                                bind_rows(corr_sum19b %>% mutate(group = "sum19") %>% 
+                                                            bind_rows(corr_sum20a %>% mutate(group = "sum20") %>% 
+                                                                        bind_rows(cal_data17 %>% mutate(md = "md1", group = "sum17"))))))))
+
+corr %>% ggplot(aes(x = md, y = corr, col = group))+
+  geom_jitter(width = 0.2)+theme_bw()
+
+
+
