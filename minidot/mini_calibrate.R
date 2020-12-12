@@ -575,7 +575,7 @@ cal_win19 <- meta %>%
   filter(year == 2019, 
          calibrating == "y", 
          site == "buck",
-         date_in %in% c("2019-08-16"))
+         date_in == "2019-08-16")
 
 # extract minidot data from calibration
 mini_cal_win19 <- minidot %>%
@@ -837,10 +837,10 @@ miniwin20<- minidot %>%
   mutate(year  = year(date_time),
          date = date(date_time)) %>%
   inner_join(meta %>%
-               filter(date_in == "2019-09-05"))  %>%
+               filter(date_in == as.Date("2020-09-05")))  %>%
   filter(date(date_time) >= date_in & date(date_time) <= date_out) %>%
   arrange(date_time) %>%
-  full_join(corr_aug19) %>% 
+  full_join(corr_aug20) %>% 
   mutate(do_cor = corr*do,
          cal_group = "aug20") %>%
   select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
@@ -861,8 +861,9 @@ mini_full1 <- minidot17_correct %>% #summer 2017
               bind_rows(mini_sum18 %>% #summer2018
                           bind_rows(mini_win18 %>% #winter 2018-2019
                                       bind_rows(mini_sum19 %>% #summer 2019
-                                                  bind_rows(miniwin19 %>% #winter 2019-2020
-                                                              bind_rows(mini_sum20)))))) #summer 2020
+                                                  bind_rows(miniwin19%>% #winter 2019-2020
+                                                              bind_rows(mini_sum20 %>% #summer 2020
+                                                                          bind_rows(miniwin20))))))) 
 
 #create date_times for removing times out of water
 meta_full <- meta %>% 
