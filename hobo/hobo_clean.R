@@ -11,6 +11,8 @@ options(mc.cores = parallel::detectCores()-2)
 flag_fn <- function(x){x[!is.na(x)] %>% length()}
 
 # import and process data
+
+list <- list.files("hobo/raw", full.names = T)
 hobo_list <- list.files("hobo/raw", full.names = T) %>%
   parallel::mclapply(function(x){
     
@@ -33,7 +35,8 @@ hobo_list <- list.files("hobo/raw", full.names = T) %>%
       set_names(c("datetime","temp","lux")) %>%
       mutate(datetime = 
                parse_date_time(datetime, orders = 
-                                 c("mdy HMS","mdy HM", "mdY HMS", "mdY HM")),
+                                 c("mdy HMS","mdy HM", "mdY HMS", "mdY HM",
+                                   "mdy HMS p","mdy HM p", "mdY HMS p", "mdY HM p")),
              name = str_remove(x, "hobo/raw/"),
              name = str_remove(name, ".txt"),
              name = str_remove(name, ".tsv"),

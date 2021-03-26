@@ -887,6 +887,11 @@ mini_full %>%
   facet_wrap(~site, scales = "free_x")+
   geom_line()
 
+mini_full %>% 
+  ggplot(aes(x = date_time, col = site, y = do_cor, group = interaction(site, layer)))+
+  facet_wrap(~cal_group, scales = "free_x")+
+  geom_line()
+
 today <- format(Sys.Date(),  format = "%d%b%y")
 # write_csv(mini_full, paste0("minidot/clean/minidot_clean_", today, ".csv"))
 
