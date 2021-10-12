@@ -58,31 +58,30 @@ hobo_list %>% lapply(function(x){
   bind_rows() %>% 
   filter(flag == "yes")
 
+flagdf <- data.frame(index = 1:length(hobo_list),name = NA, flag = NA)
+for(i in 1:length(hobo_list)){
+  flagdf$flag[i] = ifelse(any(hobo_list[[i]]$flag == "yes"), i,NA)
+  flagdf$name[i] = ifelse(any(hobo_list[[i]]$flag == "yes"), unique(hobo_list[[i]]$name),NA)
+}
+
+
+
 # fix files with missing temp
-if(hobo_list[[32]]$flag[1] == "yes") {
-  hobo_list[[32]] <- hobo_list[[32]] %>%
-    select(-lux) %>%
-    rename(lux = temp) %>%
-    mutate(flag = "no")
+flaglist <- {flagdf %>% filter(!is.na(flag))}$flag
+
+for(i in 1:length(flaglist)){
+  if(hobo_list[[flaglist[i]]]$flag[1] == "yes") {
+    hobo_list[[flaglist[i]]] <- hobo_list[[flaglist[i]]] %>%
+      select(-lux) %>%
+      rename(lux = temp) %>%
+      mutate(flag = "no")
+  }
 }
 
-if(hobo_list[[33]]$flag[1] == "yes") {
-  hobo_list[[33]] <- hobo_list[[33]] %>%
-    select(-lux) %>%
-    rename(lux = temp) %>%
-    mutate(flag = "no")
-}
-
-if(hobo_list[[50]]$flag[1] == "yes") {
-  hobo_list[[50]] <- hobo_list[[50]] %>%
-    select(-lux) %>%
-    rename(lux = temp) %>%
-    mutate(flag = "no")
-}
 
 #check lux class
-hobo_list %>% 
-  lapply(function(x){class(x$lux)})
+all(hobo_list %>% 
+  lapply(function(x){class(x$lux)})=="numeric")
 
 
 # bind rows
@@ -158,7 +157,32 @@ hobos_full %>%
   scale_color_viridis_c(trans = "log1p", direction = -1)
 
 
-#probably needs more attention than this, but ... 
+hobos_full %>% 
+  filter(year(date_in)==2021) %>% 
+  group_by(date = as.Date(datetime), site, sensor_depth, date_in) %>% 
+  summarise(lux = mean(lux)) %>% 
+  ggplot(aes(x = date, y = lux, col = sensor_depth, group = interaction(date_in, sensor_depth)))+
+  facet_wrap(~site)+
+  geom_line(alpha = 0.9)+
+  scale_y_continuous(trans= "log1p", breaks = c(0,10, 100,1000,10000), labels = scales::comma_format())+
+  scale_color_viridis_c(direction = -1)+
+  labs(color = "Sensor\nDepth",
+       y = "Daily Mean Lux",
+       x = "Date")+
+  theme_bw()
+
+
+
+hobos_full %>% 
+  filter(site == "st33", layer %in% c("out", "ben"),
+         month(datetime) %in% c(6:8)) %>% 
+  group_by(date_in, layer, date = as.Date(datetime)) %>% 
+  summarise(lux = mean(lux)) %>% 
+  ggplot(aes(x = date, y = lux, group = interaction(date_in, layer), col = layer))+
+  facet_wrap(~year(date), scales = "free_x")+
+  scale_y_continuous(trans = "log1p", breaks = c(0,10, 100,1000,10000), labels = scales::comma_format())+
+  geom_line()
+ #probably needs more attention than this, but ... 
 # hobos_full %>% 
 #   filter(layer == "ben", !is.na(hobo_id), date_in %in% c(as.Date("2019-09-01"), as.Date("2019-08-20"))) %>% 
 #   group_by(site, date = as.Date(datetime), hour = hour(datetime), sensor_depth) %>% 
