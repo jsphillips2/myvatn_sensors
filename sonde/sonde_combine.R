@@ -23,7 +23,7 @@ sonde <- list.files("sonde/raw") %>%
     if(year %in% c("2013")) {
       lines = c(-2)
     }
-    if(year %in% c("2014","2015","2016","2017","2018","2019", "2020")) {
+    if(year %in% c("2014","2015","2016","2017","2018","2019", "2020", "2021")) {
       lines = c(-1:-12, -14:-15)
     }
     
@@ -42,7 +42,7 @@ sonde <- list.files("sonde/raw") %>%
     x_csv = str_c(x_clean, collapse = "\n") %>% read_csv() %>% # create csv
       mutate(Date_Time = ymd_hms(paste(mdy(Date), Time))) # create date time
     
-    if (year %in% c("2014","2015","2016","2017","2018","2019", "2020")) {
+    if (year %in% c("2014","2015","2016","2017","2018","2019", "2020", "2021")) {
       x_csv = x_csv %>% rename(turbsc = TurbSC_1) # rename TurbSC_1
     }
     
@@ -109,6 +109,57 @@ sonde_trimmed %>%
   facet_wrap(~year, scales = "free_x")+
   geom_line()
 
+
+sonde_trimmed %>% 
+  group_by(as.Date(date_time)) %>% 
+  mutate(mean = mean(pcyv),
+         sd = sd(pcyv)) %>% 
+  filter(!is.na(date_time),
+         pcyv<mean+2*sd,
+         pcyv>mean-2*sd,
+         pcyv<0.8) %>% 
+  mutate(year = year(date_time)) %>% 
+  ggplot(aes(y = pcyv, x = date_time, group = dttm_in))+
+  facet_wrap(~year, scales = "free_x")+
+  geom_line()
+
+
+sonde_trimmed %>% 
+  group_by(as.Date(date_time)) %>% 
+  mutate(mean = mean(temp),
+         sd = sd(temp)) %>% 
+  filter(!is.na(date_time),
+         temp<mean+2*sd,
+         temp>mean-2*sd,
+         temp<30) %>% 
+  mutate(year = year(date_time)) %>% 
+  ggplot(aes(y = temp, x = date_time, group = dttm_in))+
+  facet_wrap(~year, scales = "free_x")+
+  geom_line()
+
+sonde_trimmed %>% 
+  group_by(as.Date(date_time)) %>% 
+  mutate(mean = mean(spcond),
+         sd = sd(spcond)) %>% 
+  filter(!is.na(date_time),
+         spcond<mean+2*sd,
+         spcond>mean-2*sd) %>% 
+  mutate(year = year(date_time)) %>% 
+  ggplot(aes(y = spcond, x = date_time, group = dttm_in))+
+  facet_wrap(~year, scales = "free_x")+
+  geom_line()
+
+sonde_trimmed %>% 
+  group_by(as.Date(date_time)) %>% 
+  mutate(mean = mean(turbsc),
+         sd = sd(turbsc)) %>% 
+  filter(!is.na(date_time),
+         turbsc<mean+2*sd,
+         turbsc>mean-2*sd) %>% 
+  mutate(year = year(date_time)) %>% 
+  ggplot(aes(y = turbsc, x = date_time, group = dttm_in))+
+  facet_wrap(~year, scales = "free_x")+
+  geom_line()
 
 
 # export

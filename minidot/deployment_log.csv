@@ -1,98 +1,111 @@
-﻿md,site,layer,sensor_depth,site_depth,date_in,time_in,date_out,time_out,lat,lon,calibrating,flag,comments
-md1,st33,pel,0.5,3.3,2017-06-16,NA,2017-06-20,NA,NA,NA,y,0,Calibrated next to Sonde at 33
-md1,st33,ben,3.3,3.3,2017-06-30,01:00:00,2017-07-13,11:23:00,NA,NA,n,0,deployed at bottom of st33
-md1,st33,ben,3.3,3.3,2017-07-13,11:33:00,2017-09-25,09:00:00,NA,NA,n,0,deployed at bottom of st33
-md1,st33,ben,3.3,3.3,2017-10-03,14:00:00,2018-05-31,00:00:00,NA,NA,n,0,deployed at bottom of st33 over winter
-md2,e1,ben,2.7,2.7,2017-10-03,13:30:00,2018-05-29,00:00:00,NA,NA,n,0,deployed over winter at E1
-md3,st33,pel,0.5,3.3,2018-05-27,NA,2018-05-29,NA,NA,NA,y,1,"calibrated against sonde, but the sonde was not logging."
-md2,btl,pel,0.5,1.5,2018-05-30,NA,2018-05-31,NA,NA,NA,y,0,"calibrated against md 3,4, 5 at btl"
-md3,btl,pel,0.5,1.5,2018-05-30,NA,2018-05-31,NA,NA,NA,y,0,"calibrated against 2,4,5 at boat launch"
-md4,btl,pel,0.5,1.5,2018-05-30,NA,2018-05-31,NA,NA,NA,y,0,"calibrating against 2,3,5 at btl"
-md5,btl,pel,0.5,1.5,2018-05-30,NA,2018-05-31,NA,NA,NA,y,0,calibrating at btl
-md1,btl,pel,0.5,1.5,2018-05-31,NA,2018-06-05,NA,NA,NA,y,0,calibrated against md4 at surface in btl
-md3,st33,ben,3.3,3.3,2018-05-31,12:30:00,2018-06-05,00:00:00,NA,NA,n,1,deployed at bottom of st33. calibrating? Unkown purpose. Exact time out unknown
-md4,btl,pel,0.5,1.5,2018-05-31,NA,2018-06-05,NA,NA,NA,y,0,calibrating against #1 at btl surface
-md1,buck,NA,NA,NA,2018-06-07,NA,2018-06-09,NA,NA,NA,y,1,calibrating in black bucket at lab; done prior to cleaning
-md2,buck,NA,NA,NA,2018-06-07,NA,2018-06-09,NA,NA,NA,y,1,calibrating in black bucket at lab; done prior to cleaning
-md3,buck,NA,NA,NA,2018-06-07,NA,2018-06-09,NA,NA,NA,y,0,calibrating in black bucket at lab
-md4,buck,NA,NA,NA,2018-06-07,NA,2018-06-09,NA,NA,NA,y,0,calibrating in black bucket at lab
-md5,buck,NA,NA,NA,2018-06-07,NA,2018-06-09,NA,NA,NA,y,0,calibrating in black bucket at lab
-md1,buck,NA,NA,NA,2018-06-09,17:00:00,2018-06-10,13:00:00,NA,NA,y,0,calibrating in black bucket at lab
-md2,buck,NA,NA,NA,2018-06-09,17:00:00,2018-06-10,13:00:00,NA,NA,y,0,calibrating in black bucket at lab
-md3,buck,NA,NA,NA,2018-06-09,17:00:00,2018-06-10,13:00:00,NA,NA,y,0,calibrating in black bucket at lab
-md4,buck,NA,NA,NA,2018-06-09,17:00:00,2018-06-10,13:00:00,NA,NA,y,0,calibrating in black bucket at lab
-md5,buck,NA,NA,NA,2018-06-09,17:00:00,2018-06-10,13:00:00,NA,NA,y,0,calibrating in black bucket at lab
-md1,buck,NA,NA,NA,2018-06-10,16:00:00,2018-06-11,15:20:00,NA,NA,y,0,calibrating in white bucket at lab
-md2,buck,NA,NA,NA,2018-06-10,16:00:00,2018-06-11,15:20:00,NA,NA,y,0,calibrating in white bucket at lab
-md3,buck,NA,NA,NA,2018-06-10,16:00:00,2018-06-11,15:20:00,NA,NA,y,0,calibrating in white bucket at lab
-md4,buck,NA,NA,NA,2018-06-10,16:00:00,2018-06-11,15:20:00,NA,NA,y,0,calibrating in white bucket at lab
-md5,buck,NA,NA,NA,2018-06-10,16:00:00,2018-06-11,15:20:00,NA,NA,y,0,calibrating in white bucket at lab
-md1,grim,ben,5.1,5.1,2018-06-13,12:00:00,2018-06-23,10:50:00,NA,NA,n,0,deployed at bottom of Grimmstadir pit
-md1,grim,ben,5.1,5.1,2018-06-23,11:58:00,2018-07-17,18:51:00,NA,NA,n,0,deployed at bottom of Grimmstadir pit
-md1,grim,ben,5.1,5.1,2018-07-17,19:46:00,2018-08-15,01:00:00,NA,NA,n,0,deployed at bottom of Grimmstadir pit
-md2,reyk,ben,4.25,4.25,2018-06-13,09:45:00,2018-07-17,19:45:00,NA,NA,n,0,deployed at bottom of reykjahlid
-md2,reyk,ben,4.25,4.25,2018-07-17,20:26:00,2018-08-15,01:00:00,NA,NA,n,0,deployed at bottom of reykjahlid
-md4,st33,ben,3.3,3.3,2018-06-13,13:00:00,2018-07-21,11:26:00,NA,NA,n,0,deployed at bottom of st33
-md4,st33,ben,3.3,3.3,2018-07-21,12:04:00,2018-08-15,01:00:00,NA,NA,n,0,deployed at bottom of st33
-md5,reyk,pel,0.5,4.25,2018-06-13,12:00:00,2018-08-15,01:00:00,NA,NA,n,0,deployed at reykjahlid pelagic
-md3,grim,pel,0.5,5.1,2018-06-23,13:00:00,2018-07-17,18:30:00,NA,NA,n,1,deployed at grimmstadir in the pelagic zone
-md3,grim,pel,0.5,5.1,2018-07-17,18:55:00,2018-08-15,01:00:00,NA,NA,n,1,deployed at grimmstadir in the pelagic zone
-md1,buck,NA,NA,NA,2018-08-17,NA,2018-08-19,NA,NA,NA,y,0,calibrating in white bucket at lab
-md2,buck,NA,NA,NA,2018-08-17,NA,2018-08-19,NA,NA,NA,y,0,calibrating in white bucket at lab
-md3,buck,NA,NA,NA,2018-08-17,NA,2018-08-19,NA,NA,NA,y,0,calibrating in white bucket at lab
-md4,buck,NA,NA,NA,2018-08-17,NA,2018-08-19,NA,NA,NA,y,0,calibrating in white bucket at lab
-md5,buck,NA,NA,NA,2018-08-17,NA,2018-08-19,NA,NA,NA,y,0,calibrating in white bucket at lab
-md1,cs,ben,,,2018-08-20,00:00:00,2019-06-07,01:00:00,0408498,7273661,n,0,deployed at cold springs site over winter
+md,site,layer,sensor_depth,site_depth,date_in,time_in,date_out,time_out,lat,lon,calibrating,flag,comments
+md1,st33,pel,0.5,3.3,2017-06-16,"NA",2017-06-20,"NA","NA","NA",y,0,Calibrated next to Sonde at 33
+md1,st33,ben,3.3,3.3,2017-06-30,01:00:00,2017-07-13,11:23:00,"NA","NA",n,0,deployed at bottom of st33
+md1,st33,ben,3.3,3.3,2017-07-13,11:33:00,2017-09-25,09:00:00,"NA","NA",n,0,deployed at bottom of st33
+md1,st33,ben,3.3,3.3,2017-10-03,14:00:00,2018-05-31,00:00:00,"NA","NA",n,0,deployed at bottom of st33 over winter
+md2,e1,ben,2.7,2.7,2017-10-03,13:30:00,2018-05-29,00:00:00,"NA","NA",n,0,deployed over winter at E1
+md3,st33,pel,0.5,3.3,2018-05-27,"NA",2018-05-29,"NA","NA","NA",y,1,"calibrated against sonde, but the sonde was not logging."
+md2,btl,pel,0.5,1.5,2018-05-30,"NA",2018-05-31,"NA","NA","NA",y,0,"calibrated against md 3,4, 5 at btl"
+md3,btl,pel,0.5,1.5,2018-05-30,"NA",2018-05-31,"NA","NA","NA",y,0,"calibrated against 2,4,5 at boat launch"
+md4,btl,pel,0.5,1.5,2018-05-30,"NA",2018-05-31,"NA","NA","NA",y,0,"calibrating against 2,3,5 at btl"
+md5,btl,pel,0.5,1.5,2018-05-30,"NA",2018-05-31,"NA","NA","NA",y,0,calibrating at btl
+md1,btl,pel,0.5,1.5,2018-05-31,"NA",2018-06-05,"NA","NA","NA",y,0,calibrated against md4 at surface in btl
+md3,st33,ben,3.3,3.3,2018-05-31,12:30:00,2018-06-05,00:00:00,"NA","NA",n,1,deployed at bottom of st33. calibrating? Unkown purpose. Exact time out unknown
+md4,btl,pel,0.5,1.5,2018-05-31,"NA",2018-06-05,"NA","NA","NA",y,0,calibrating against #1 at btl surface
+md1,buck,"NA","NA","NA",2018-06-07,"NA",2018-06-09,"NA","NA","NA",y,1,calibrating in black bucket at lab; done prior to cleaning
+md2,buck,"NA","NA","NA",2018-06-07,"NA",2018-06-09,"NA","NA","NA",y,1,calibrating in black bucket at lab; done prior to cleaning
+md3,buck,"NA","NA","NA",2018-06-07,"NA",2018-06-09,"NA","NA","NA",y,0,calibrating in black bucket at lab
+md4,buck,"NA","NA","NA",2018-06-07,"NA",2018-06-09,"NA","NA","NA",y,0,calibrating in black bucket at lab
+md5,buck,"NA","NA","NA",2018-06-07,"NA",2018-06-09,"NA","NA","NA",y,0,calibrating in black bucket at lab
+md1,buck,"NA","NA","NA",2018-06-09,17:00:00,2018-06-10,13:00:00,"NA","NA",y,0,calibrating in black bucket at lab
+md2,buck,"NA","NA","NA",2018-06-09,17:00:00,2018-06-10,13:00:00,"NA","NA",y,0,calibrating in black bucket at lab
+md3,buck,"NA","NA","NA",2018-06-09,17:00:00,2018-06-10,13:00:00,"NA","NA",y,0,calibrating in black bucket at lab
+md4,buck,"NA","NA","NA",2018-06-09,17:00:00,2018-06-10,13:00:00,"NA","NA",y,0,calibrating in black bucket at lab
+md5,buck,"NA","NA","NA",2018-06-09,17:00:00,2018-06-10,13:00:00,"NA","NA",y,0,calibrating in black bucket at lab
+md1,buck,"NA","NA","NA",2018-06-10,16:00:00,2018-06-11,15:20:00,"NA","NA",y,0,calibrating in white bucket at lab
+md2,buck,"NA","NA","NA",2018-06-10,16:00:00,2018-06-11,15:20:00,"NA","NA",y,0,calibrating in white bucket at lab
+md3,buck,"NA","NA","NA",2018-06-10,16:00:00,2018-06-11,15:20:00,"NA","NA",y,0,calibrating in white bucket at lab
+md4,buck,"NA","NA","NA",2018-06-10,16:00:00,2018-06-11,15:20:00,"NA","NA",y,0,calibrating in white bucket at lab
+md5,buck,"NA","NA","NA",2018-06-10,16:00:00,2018-06-11,15:20:00,"NA","NA",y,0,calibrating in white bucket at lab
+md1,grim,ben,5.0999999999999996,5.0999999999999996,2018-06-13,12:00:00,2018-06-23,10:50:00,"NA","NA",n,0,deployed at bottom of Grimmstadir pit
+md1,grim,ben,5.0999999999999996,5.0999999999999996,2018-06-23,11:58:00,2018-07-17,18:51:00,"NA","NA",n,0,deployed at bottom of Grimmstadir pit
+md1,grim,ben,5.0999999999999996,5.0999999999999996,2018-07-17,19:46:00,2018-08-15,01:00:00,"NA","NA",n,0,deployed at bottom of Grimmstadir pit
+md2,reyk,ben,4.25,4.25,2018-06-13,09:45:00,2018-07-17,19:45:00,"NA","NA",n,0,deployed at bottom of reykjahlid
+md2,reyk,ben,4.25,4.25,2018-07-17,20:26:00,2018-08-15,01:00:00,"NA","NA",n,0,deployed at bottom of reykjahlid
+md4,st33,ben,3.3,3.3,2018-06-13,13:00:00,2018-07-21,11:26:00,"NA","NA",n,0,deployed at bottom of st33
+md4,st33,ben,3.3,3.3,2018-07-21,12:04:00,2018-08-15,01:00:00,"NA","NA",n,0,deployed at bottom of st33
+md5,reyk,pel,0.5,4.25,2018-06-13,12:00:00,2018-08-15,01:00:00,"NA","NA",n,0,deployed at reykjahlid pelagic
+md3,grim,pel,0.5,5.0999999999999996,2018-06-23,13:00:00,2018-07-17,18:30:00,"NA","NA",n,1,deployed at grimmstadir in the pelagic zone
+md3,grim,pel,0.5,5.0999999999999996,2018-07-17,18:55:00,2018-08-15,01:00:00,"NA","NA",n,1,deployed at grimmstadir in the pelagic zone
+md1,buck,"NA","NA","NA",2018-08-17,"NA",2018-08-19,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md2,buck,"NA","NA","NA",2018-08-17,"NA",2018-08-19,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md3,buck,"NA","NA","NA",2018-08-17,"NA",2018-08-19,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md4,buck,"NA","NA","NA",2018-08-17,"NA",2018-08-19,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md5,buck,"NA","NA","NA",2018-08-17,"NA",2018-08-19,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md1,cs,ben,NA,NA,2018-08-20,00:00:00,2019-06-07,01:00:00,0408498,7273661,n,0,deployed at cold springs site over winter
 md2,e5,ben,2.5,2.5,2018-08-20,00:00:00,2019-06-07,01:00:00,0409726,7275870,n,0,deployed at the bottom of e5 over winter
 md3,e1,ben,2.7,2.7,2018-08-20,00:00:00,2019-06-11,01:00:00,0405970,7274492,n,0,deployed below ice at e1
 md4,reyk,ben,4.3,4.3,2018-08-20,00:00:00,2019-06-11,01:00:00,0411401,7281207,n,1,large amounts of macrophytes covering rack when retrieved; deployed under ice at reykjahlid
 md5,st33,ben,3.3,3.3,2018-08-20,00:00:00,2019-06-09,13:30:00,0407631,7276125,n,0,calibrated against sonde
-md1,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,NA,NA,NA,y,0,calibrating against sonde at st33
-md2,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,NA,NA,NA,y,0,calibrated against sonde
-md5,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,NA,NA,NA,y,0,calibrated against sonde
-md6,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,NA,NA,NA,y,0,calibrating against sonde at st33
+md1,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,"NA","NA","NA",y,0,calibrating against sonde at st33
+md2,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,"NA","NA","NA",y,0,calibrated against sonde
+md5,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,"NA","NA","NA",y,0,calibrated against sonde
+md6,st33,pel,0.5,3.3,2019-06-10,18:05:00,2019-06-11,"NA","NA","NA",y,0,calibrating against sonde at st33
 md2,st33,ben,3.3,3.3,2019-06-15,11:53:00,2019-08-15,01:00:00,0407614,7276069,n,0,deployed at the bottom of st33
 md5,e5,ben,2.5,2.5,2019-06-15,12:30:00,2019-08-15,01:00:00,0409839,7276330,n,0,deployed at bottom of e5
 md6,e5,pel,0.5,2.5,2019-06-15,12:40:00,2019-08-15,01:00:00,0409865,7276316,n,0,deployed at surface at e5
 md1,reyk,pel,0.5,4.3,2019-06-15,13:37:00,2019-08-19,01:00:00,0411411,7281201,n,0,deployed at the surface of Reykjahlid
-md3,st33,pel,0.5,3.3,2019-06-15,11:37:00,2019-06-16,12:30:00,NA,NA,y,0,calibrating against sonde at st33
-md4,st33,pel,0.5,3.3,2019-06-15,11:37:00,2019-06-16,12:30:00,NA,NA,y,0,calibrating against sonde at st33
+md3,st33,pel,0.5,3.3,2019-06-15,11:37:00,2019-06-16,12:30:00,"NA","NA",y,0,calibrating against sonde at st33
+md4,st33,pel,0.5,3.3,2019-06-15,11:37:00,2019-06-16,12:30:00,"NA","NA",y,0,calibrating against sonde at st33
 md3,reyk,ben,4.3,4.3,2019-06-16,13:32:00,2019-08-15,01:00:00,0411395,7281206,n,0,deployed at benthos of reykjahlid
 md4,grim,ben,6.5,6.5,2019-06-16,14:29:00,2019-08-15,01:00:00,0409991,7282200,n,0,deployed at bottom of grimstadir pit
-md1,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrated in the white bucket
-md2,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrated in the white bucket
-md3,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrating in white bucket at lab
-md4,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrating in white bucket at lab
-md5,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrating in white bucket at lab
-md6,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrating in white bucket at lab
-md7,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,0,calibrating in white bucket at lab
-md8,buck,NA,NA,NA,2019-08-16,NA,2019-08-17,NA,NA,NA,y,1,calibrating in white bucket at lab; time is slightly off
+md1,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrated in the white bucket
+md2,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrated in the white bucket
+md3,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md4,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md5,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md6,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md7,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,0,calibrating in white bucket at lab
+md8,buck,"NA","NA","NA",2019-08-16,"NA",2019-08-17,"NA","NA","NA",y,1,calibrating in white bucket at lab; time is slightly off
 md4,e1,ben,2.7,2.7,2019-08-20,18:30:00,2020-06-02,12:00:00,0405911,7274524,n,0,deployed under ice at e1
-md5,e5,ben,2.5,2.5,2019-08-20,20:08:00,,,0409775,7276396,n,1,coords likely off by ~20 m
+md5,e5,ben,2.5,2.5,2019-08-20,20:08:00,NA,NA,0409775,7276396,n,1,coords likely off by ~20 m
 md6,e6,ben,2.8,2.8,2019-08-20,17:23:00,2020-06-02,12:00:00,0408911,7274363,n,0,deployed under ice at e6
-md7,st33,ben,3.3,3.3,2019-08-20,19:45:00,2020-07-21,13:00:00,0407609,7276137,n,0,deployed under ice at st 33. 
-md8,e2,ben,2.7,2.7,2019-08-20,19:00:00,,,0406269,7278009,n,1,check time
+md7,st33,ben,3.3,3.3,2019-08-20,19:45:00,2020-07-21,13:00:00,0407609,7276137,n,0,deployed under ice at st 33.
+md8,e2,ben,2.7,2.7,2019-08-20,19:00:00,NA,NA,0406269,7278009,n,1,check time
 md3,reyk,ben,4.3,4.3,2019-09-01,01:00:00,2020-10-01,12:00:00,0411394,7281214,n,1,Battery died in May 2019
-md1,buck,NA,NA,NA,2020-07-24,11:30:00,2020-07-25,10:00:00,NA,NA,y,0,calibrating in white bucket at lab.
-md2,buck,NA,NA,NA,2020-07-24,11:30:00,2020-07-25,10:00:00,NA,NA,y,0,calibrating in white bucket at lab.
-md4,buck,NA,NA,NA,2020-07-24,11:30:00,2020-07-25,10:00:00,NA,NA,y,0,calibrating in white bucket at lab.
-md6,buck,NA,NA,NA,2020-07-24,11:30:00,2020-07-25,10:00:00,NA,NA,y,0,calibrating in white bucket at lab.
-md7,buck,NA,NA,NA,2020-07-24,11:30:00,2020-07-25,10:00:00,NA,NA,y,0,calibrating in white bucket at lab.
+md1,buck,"NA","NA","NA",2020-07-24,11:30:00,2020-07-25,10:00:00,"NA","NA",y,0,calibrating in white bucket at lab.
+md2,buck,"NA","NA","NA",2020-07-24,11:30:00,2020-07-25,10:00:00,"NA","NA",y,0,calibrating in white bucket at lab.
+md4,buck,"NA","NA","NA",2020-07-24,11:30:00,2020-07-25,10:00:00,"NA","NA",y,0,calibrating in white bucket at lab.
+md6,buck,"NA","NA","NA",2020-07-24,11:30:00,2020-07-25,10:00:00,"NA","NA",y,0,calibrating in white bucket at lab.
+md7,buck,"NA","NA","NA",2020-07-24,11:30:00,2020-07-25,10:00:00,"NA","NA",y,0,calibrating in white bucket at lab.
 md1,st33,pel,0.5,3.3,2020-07-26,10:30:00,2020-07-28,12:40:00,0407586,7276114,y,0,"calibrating against the sonde, <10m away"
 md2,st33,pel,0.5,3.3,2020-07-26,10:30:00,2020-07-28,12:40:00,0407586,7276114,y,0,"calibrating against the sonde, <10m away"
 md4,st33,pel,0.5,3.3,2020-07-26,10:30:00,2020-07-28,12:40:00,0407586,7276114,y,0,"calibrating against the sonde, <10m away"
 md6,st33,pel,0.5,3.3,2020-07-26,10:30:00,2020-07-28,12:40:00,0407586,7276114,y,0,"calibrating against the sonde, <10m away"
 md7,st33,pel,0.5,3.3,2020-07-26,10:30:00,2020-07-28,12:40:00,0407586,7276114,y,0,"calibrating against the sonde, <10m away"
-md1,st33,ben,3.3,3.3,2020-07-28,13:00:00,2020-08-28,13:00:00,0407608,7276102,n,0,
-md2,e2,pel,1,,2020-07-28,13:50:00,2020-08-28,12:40:00,0406431,7278047,n,0,
-md7,e5,pel,1,,2020-07-28,15:00:00,2020-08-28,14:45:00,0409782,7276402,n,0,
-md4,e1,pel,1,,2020-07-29,11:50:00,2020-08-28,11:00:00,0405969,7274529,n,0,
-md6,e6,pel,1,,2020-07-29,14:30:00,2020-08-28,15:00:00,0408950,7274328,n,0,
-md1,buck,NA,NA,NA,2020-08-29,23:00:00,2020-09-01,08:00:00,NA,NA,y,0,
-md2,buck,NA,NA,NA,2020-08-29,23:00:00,2020-09-01,08:00:00,NA,NA,y,0,
-md7,buck,NA,NA,NA,2020-08-29,23:00:00,2020-09-01,08:00:00,NA,NA,y,0,
-md4,buck,NA,NA,NA,2020-08-29,23:00:00,2020-09-01,08:00:00,NA,NA,y,0,
-md6,buck,NA,NA,NA,2020-08-29,23:00:00,2020-09-01,08:00:00,NA,NA,y,0,
-md4,e1,ben,2.7,2.7,2020-09-05,15:15:00,,,0405921,7274589,n,,
-md1,st33,ben,3.3,3.3,2020-09-05,15:45:00,,,0407607,7276117,n,,
-md2,e6,ben,2.7,2.7,2020-09-05,16:30:00,,,0408994,7274434,n,,
+md1,st33,ben,3.3,3.3,2020-07-28,13:00:00,2020-08-28,13:00:00,0407608,7276102,n,0,NA
+md2,e2,pel,1,2.7,2020-07-28,13:50:00,2020-08-28,12:40:00,0406431,7278047,n,0,NA
+md7,e5,pel,1,2.5,2020-07-28,15:00:00,2020-08-28,14:45:00,0409782,7276402,n,0,NA
+md4,e1,pel,1,2.7,2020-07-29,11:50:00,2020-08-28,11:00:00,0405969,7274529,n,0,NA
+md6,e6,pel,1,2.8,2020-07-29,14:30:00,2020-08-28,15:00:00,0408950,7274328,n,0,NA
+md1,buck,"NA","NA","NA",2020-08-29,23:00:00,2020-09-01,08:00:00,"NA","NA",y,0,NA
+md2,buck,"NA","NA","NA",2020-08-29,23:00:00,2020-09-01,08:00:00,"NA","NA",y,0,NA
+md7,buck,"NA","NA","NA",2020-08-29,23:00:00,2020-09-01,08:00:00,"NA","NA",y,0,NA
+md4,buck,"NA","NA","NA",2020-08-29,23:00:00,2020-09-01,08:00:00,"NA","NA",y,0,NA
+md6,buck,"NA","NA","NA",2020-08-29,23:00:00,2020-09-01,08:00:00,"NA","NA",y,0,NA
+md4,e1,ben,2.7,2.7,2020-09-05,15:15:00,NA,NA,0405921,7274589,n,0,NA
+md1,st33,ben,3.3,3.3,2020-09-05,15:45:00,2021-05-21,10:00:00,0407607,7276117,n,0,NA
+md2,e6,ben,2.7,2.7,2020-09-05,16:30:00,"NA","NA",0408994,7274434,n,1,miniDOT was lacking all data when retrieved
+md6,st33,pel,0.5,3.3,2021-06-01,13:07:00,2021-06-05,16:30:00,"NA","NA",y,1,miniDOTs disconnected from sonde and ended up in benthos. Do not calibrate using these measurements.
+md1,st33,pel,0.5,3.3,2021-06-01,13:07:00,2021-06-05,16:30:00,"NA","NA",y,1,miniDOTs disconnected from sonde and ended up in benthos. Do not calibrate using these measurements.
+md7,st33,pel,0.5,3.3,2021-06-01,13:07:00,2021-06-05,16:30:00,"NA","NA",y,1,miniDOTs disconnected from sonde and ended up in benthos. Do not calibrate using these measurements.
+md1,st33,pel,0.5,3.3,2021-06-05,16:30:00,2021-06-08,12:35:00,0407658,7276132,y,0,NA
+md2,st33,pel,0.5,3.3,2021-06-05,16:30:00,2021-06-08,12:35:00,0407658,7276132,y,0,NA
+md6,st33,pel,0.5,3.3,2021-06-05,16:30:00,2021-06-08,12:35:00,0407658,7276132,y,0,NA
+md3,st33,pel,0.5,3.3,2021-06-05,16:30:00,2021-06-08,12:35:00,0407658,7276132,y,0,NA
+md7,st33,pel,0.5,3.3,2021-06-05,16:30:00,2021-06-08,12:35:00,0407658,7276132,y,0,NA
+md3,e4,pel,0.5,2.9,2021-06-08,14:35:00,2021-08-20,10:33:00,0407627,7278643,n,0,some fouling on minidot housing
+md2,e2,pel,0.5,2.7,2021-06-08,16:03:00,2021-08-20,10:48:00,0406227,7278015,n,0,some fouling on minidot housing
+md7,e5,pel,0.5,2.5,2021-06-08,17:35:00,2021-08-20,10:13:00,0409741,7276483,n,0,some fouling on minidot housing
+md1,e6,pel,0.5,2.8,2021-06-08,18:02:00,2021-08-20,09:56:00,0408938,7274441,n,0,lots of fouling on minidot housing
+md6,e1,pel,0.5,2.7,2021-06-09,12:15:00,2021-08-20,11:43:00,0405983,7274510,n,0,some fouling on minidot housing

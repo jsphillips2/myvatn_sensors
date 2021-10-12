@@ -855,6 +855,204 @@ miniwin20 %>%
 
 
 
+
+#=====Summer 2021 corrections=====
+#extract calibration
+cal_sum21 <- meta %>%
+  mutate(year  = year(date_in)) %>%
+  filter(year == 2021, 
+         calibrating == "y", 
+         site == "st33",
+         date_in == "2021-06-05")
+  
+
+
+# extract sonde data
+sonde_cal_sum21 <- sonde %>%
+  mutate(year  = year(date_time)) %>%
+  filter(as.Date(date_time) >= unique(cal_sum21$date_in) & as.Date(date_time) <= unique(cal_sum21$date_out))
+
+# extract minidot data
+mini_cal_sum21 <- minidot %>%
+  mutate(year  = year(date_time)) %>%
+  inner_join(cal_sum21) %>%
+  filter(as.Date(date_time) >= date_in & as.Date(date_time) <= date_out)
+
+# plot temp
+#find times
+starttime <- as_datetime("2021-06-05 20:00:00")
+endtime <- as_datetime("2021-06-08 11:30:00")
+
+#check
+sonde_cal_sum21 %>%
+  select(date_time,  temp) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum21 %>%
+              select(md, date_time,  temp)) %>%
+  ggplot(aes(date_time,  temp, color  = md))+
+  geom_line()+
+  geom_vline(xintercept = starttime)+
+  geom_vline(xintercept = endtime)+
+  theme_bw()
+
+#plot temp
+sonde_cal_sum21 %>%
+  filter(date_time >= starttime& date_time <= endtime) %>%
+  select(date_time,  temp) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum21 %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(md, date_time,  temp)) %>%
+  ggplot(aes(date_time,  temp, color  = md))+
+  geom_line()+
+  theme_bw()
+#need to fix temp for md3
+
+
+# plot do
+sonde_cal_sum21 %>%
+  filter(date_time >= starttime& date_time <= endtime) %>%
+  select(date_time,  do) %>%
+  mutate(md  = "sonde") %>%
+  bind_rows(mini_cal_sum21 %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(md, date_time,  do)) %>%
+  ggplot(aes(date_time,  do, color  = md))+
+  geom_line()+
+  theme_bw()
+
+mini_cal_sum21 %>%
+  filter(date_time >= starttime & date_time <= endtime) %>%
+  select(md, date_time,  do) %>%
+  mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+  group_by(md, date_time) %>%
+  summarize(do = mean(do)) %>%
+  full_join(sonde_cal_sum21 %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(date_time,  do) %>%
+              mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+              group_by(date_time) %>%
+              summarize(do_sonde = mean(do))) %>%
+  group_by(md) %>%
+  filter(!is.na(do_sonde)) %>% 
+  summarize(corr = mean(do_sonde/do))
+
+
+mini_cal_sum21 %>%
+  filter(date_time >= starttime & date_time <= endtime) %>%
+  select(md, date_time,  temp) %>%
+  mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+  group_by(md, date_time) %>%
+  summarize(temp = mean(temp)) %>%
+  full_join(sonde_cal_sum21 %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(date_time,  temp) %>%
+              mutate(date_time  = round_date(date_time, unit = "hour")) %>%
+              group_by(date_time) %>%
+              summarize(temp_sonde = mean(temp))) %>%
+  group_by(md) %>%
+  filter(!is.na(temp_sonde)) %>% 
+  summarize(corr = mean(temp_sonde/temp))
+tempcorr_md3_sum21 <- 1.04
+
+
+match_minis_cal_sum21 <- mini_cal_sum21 %>%
+  filter(date_time >= starttime & date_time <= endtime) %>%
+  select(md, date_time,  do) %>%
+  mutate(hour  = round_date(date_time, unit = "hour")) %>%
+  left_join(sonde_cal_sum21 %>%
+              filter(date_time >= starttime & date_time <= endtime) %>%
+              select(date_time,  do) %>%
+              mutate(hour  = round_date(date_time, unit = "hour")) %>%
+              rename(date_time_sonde = date_time,
+                     do_sonde = do)) %>%
+  mutate(dist = abs(date_time_sonde - date_time)) %>%
+  group_by(md, hour) %>%
+  filter(dist == min(dist)) %>%
+  filter(date_time == min(date_time)) %>%
+  ungroup() %>%
+  select(md, hour, date_time, do, do_sonde) 
+
+match_minis_cal_sum21 %>%
+  gather(var, val, do, do_sonde) %>%
+  mutate(md = ifelse(var == "do_sonde","sonde",md)) %>%
+  ggplot(aes(date_time,  val, color  = md))+
+  geom_point()+
+  geom_line()+
+  geom_line(aes(group = hour), color = "black")+
+  theme_bw()
+
+corr_sum21 <- match_minis_cal_sum21 %>%
+  group_by(md) %>%
+  summarize(corr = mean(do_sonde/do))
+
+
+# identify summmer 2020 date/md
+sum21 <- meta %>%
+  mutate(year  = year(date_in),
+         dttm_in = as.POSIXct(paste(date_in, time_in), format="%Y-%m-%d %H:%M:%S"),
+         dttm_out = as.POSIXct(paste(date_out, time_out), format="%Y-%m-%d %H:%M:%S")) %>% 
+  filter(year == 2021,
+         date_out == as.Date("2021-08-20") )
+
+
+
+# extract deployment data and correct
+mini_sum21 <- minidot %>%
+  inner_join(sum21) %>%
+  filter(date_time > dttm_in & date_time <= dttm_out) %>%
+  left_join(corr_sum21) %>%
+  mutate(do_cor = corr*do,
+         temp = ifelse(md == "md3", temp*tempcorr_md3_sum21, temp)) %>%
+  mutate(cal_group  = "jun21") %>%
+  select(site, lat, lon, layer, sensor_depth, date_time, q, temp, do_eq, do, do_cor, do_sat,
+         cal_group, flag)
+
+
+# Temp
+mini_sum21 %>%
+  ggplot(aes(date_time, temp, color = site))+
+  geom_line()+
+  theme_bw()
+
+# plot DO
+mini_sum21 %>%
+  bind_rows(sonde_trimmed %>% filter(year(date_time)==2021) %>% 
+              mutate(site = "st33")) %>% 
+  group_by(day = as.Date(date_time), site) %>% 
+  mutate(mean = mean(do),
+         sd = sd(do)) %>% 
+  filter(do<mean+2*sd,
+         do>mean-2*sd,
+         do!=0) %>% 
+  ggplot(aes(date_time, do))+
+  facet_wrap(~site, nrow = 2)+
+  geom_line()+
+  lims(y = c(0,NA))+
+  labs(x = "Date",
+       y = expression("DO"~(mg~L^{-1}~h^{-1})))+
+  # scale_color_manual(values=c("firebrick","dodgerblue"))+
+  theme_bw()
+
+mini_sum21 %>%
+  bind_rows(sonde_trimmed %>% filter(year(date_time)==2021) %>% 
+              mutate(site = "st33")) %>% 
+  group_by(day = as.Date(date_time), site) %>% 
+  mutate(mean = mean(do_sat),
+         sd = sd(do_sat)) %>% 
+  filter(do_sat<mean+2*sd,
+         do_sat>mean-2*sd,
+         do_sat!=0) %>% 
+  ggplot(aes(day, mean, col  = site))+
+  geom_line(alpha = 0.6, size = 1)+
+  # lims(y = c(0,NA))+
+  labs(x = "Date",
+       y = expression("Daily Mean do_sat"~(mg~L^{-1}~h^{-1})))+
+  # scale_color_manual(values=c("firebrick","do_satdgerblue"))+
+  scale_color_brewer(palette = "Dark2")+
+  theme_bw()
+
+
 #=====Join all Files together=====
 mini_full1 <- minidot17_correct %>% #summer 2017
   bind_rows(mini_win17 %>% #winter 2017-2018
@@ -863,7 +1061,8 @@ mini_full1 <- minidot17_correct %>% #summer 2017
                                       bind_rows(mini_sum19 %>% #summer 2019
                                                   bind_rows(miniwin19%>% #winter 2019-2020
                                                               bind_rows(mini_sum20 %>% #summer 2020
-                                                                          bind_rows(miniwin20))))))) 
+                                                                          bind_rows(miniwin20 %>% 
+                                                                                      bind_rows(mini_sum21)))))))) 
 
 #create date_times for removing times out of water
 meta_full <- meta %>% 
@@ -895,7 +1094,6 @@ mini_full %>%
 today <- format(Sys.Date(),  format = "%d%b%y")
 # write_csv(mini_full, paste0("minidot/clean/minidot_clean_", today, ".csv"))
 
-
 #====Explore some of the corrections====
 
 corr <- bind_rows(corr_aug18 %>% mutate(group = "aug18"),  corr_aug19 %>% mutate(group = "aug19") %>% 
@@ -904,7 +1102,8 @@ corr <- bind_rows(corr_aug18 %>% mutate(group = "aug18"),  corr_aug19 %>% mutate
                                     bind_rows(corr_sum19a %>% mutate(group = "sum19") %>% 
                                                 bind_rows(corr_sum19b %>% mutate(group = "sum19") %>% 
                                                             bind_rows(corr_sum20a %>% mutate(group = "sum20") %>% 
-                                                                        bind_rows(cal_data17 %>% mutate(md = "md1", group = "sum17"))))))))
+                                                                        bind_rows(corr_sum21 %>% mutate(group = "sum21") %>%
+                                                                        bind_rows(cal_data17 %>% mutate(md = "md1", group = "sum17")))))))))
 
 corr %>% ggplot(aes(x = md, y = corr, col = group))+
   geom_jitter(width = 0.2)+theme_bw()
