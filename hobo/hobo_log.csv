@@ -1,82 +1,121 @@
-name,site,layer,date_in,date_out,hobo_id,sensor_depth,site_depth,acryllic,flag,comments
-cs_ben_20Aug2018_04Jun2019_A,cs,ben,2018-08-20,2019-06-04,A,NA,NA,n,1,hobo affixed to top of rack
-cs_ben_20Aug2018_04Jun2019_B,cs,ben,2018-08-20,2019-06-04,B,NA,NA,n,1,hobo affixed to top of rack
-e1_ben_22Aug2017_29May2018_A,e1,ben,2017-08-22,2018-05-29,A,NA,2.7,NA,1,hobo attached gray box?
-e1_ben_22Aug2017_29May2018_B,e1,ben,2017-08-22,2018-05-29,B,NA,2.7,NA,1,hobo attached gray box?
-e1_ben_20Aug2018_04Jun2019_A,e1,ben,2018-08-20,2019-06-04,A,2.2,2.7,n,0,hobo affixed to top of rack
-e1_ben_20Aug2018_04Jun2019_B,e1,ben,2018-08-20,2019-06-04,B,2.2,2.7,n,0,hobo affixed to top of rack
-e5_ben_20Aug2018_03Jun2019_B,e5,ben,2018-08-20,2019-06-03,B,2,2.5,n,0,hobo affixed to top of rack
-e5_ben_20Aug2018_04Jun2019_A,e5,ben,2018-08-20,2019-06-04,A,2,2.5,n,0,hobo affixed to top of rack
-e5_ben_13Jun2019_15Aug2019,e5,ben,2019-06-13,2019-08-15,"NA",2,2.5,n,0,hobo affixed to top of rack
-e5_pel_13Jun2019_15Aug2019,e5,pel,2019-06-13,2019-08-15,"NA",1,2.5,y,0,hobo in tube on cord
-grim_ben_13Jun2018_18Jul2018,grim,ben,2018-06-13,2018-07-18,"NA",5.1,5.1,y,0,hobo attached to base of minidot rack
-grim_ben_17Jul2018_16Aug2018,grim,ben,2018-07-17,2018-08-16,"NA",5.1,5.1,y,0,hobo attached to base of minidot rack
-grim_ben_16Jun2019_15Aug2019,grim,ben,2019-06-16,2019-08-15,"NA",6,6.5,n,0,hobo affixed to top of rack
-grim_pel_13Jun2018_18Jul2018,grim,pel,2018-06-13,2018-07-18,"NA",1,5.1,y,0,hobo in tube on cord
-grim_pel_17Jul2018_16Aug2018,grim,pel,2018-07-17,2018-08-16,"NA",1,5.1,y,0,hobo in tube on cord
-grim_pel_16Jun2019_15Aug2019,grim,pel,2019-06-16,2019-08-15,"NA",1,6.5,y,0,hobo in tube on cord
-reyk_ben_13Jun2018_18Jul2018,reyk,ben,2018-06-13,2018-07-18,"NA",4.25,4.25,y,0,hobo attached to base of minidot rack
-reyk_ben_17Jul2018_16Aug2018,reyk,ben,2018-07-17,2018-08-16,"NA",4.25,4.25,y,0,hobo attached to base of minidot rack
-reyk_ben_20Aug2018_04Jun2019_A,reyk,ben,2018-08-20,2019-06-04,A,3.8,4.3,n,1,rack covered in macrophytes when retrieved; hobo affixed to top of rack
-reyk_ben_20Aug2018_04Jun2019_B,reyk,ben,2018-08-20,2019-06-04,B,3.8,4.3,n,1,rack covered in macrophytes when retrieved; hobo affixed to top of rack
-reyk_ben_16Jun2019_15Aug2019,reyk,ben,2019-06-16,2019-08-15,"NA",3.8,4.3,n,0,hobo affixed to top of rack
-reyk_pel_13Jun2018_18Jul2018,reyk,pel,2018-06-13,2018-07-18,"NA",1,4.25,y,0,hobo in tube on cord
-reyk_pel_17Jul2018_16Aug2018,reyk,pel,2018-07-17,2018-08-16,"NA",1,4.25,y,0,hobo in tube on cord
-reyk_pel_16Jun2019_15Aug2019,reyk,pel,2019-06-16,2019-08-15,"NA",1,4.3,y,0,hobo in tube on cord
-st33_ben_22Aug2017_29May2018_B,st33,ben,2017-08-22,2018-05-29,B,NA,3.3,NA,1,hobo attached gray box?
-st33_ben_22Aug2017_31May2018_A,st33,ben,2017-08-22,2018-05-31,A,NA,3.3,NA,1,hobo attached gray box?
-st33_ben_13Jun2018_16Aug2018,st33,ben,2018-06-13,2018-08-16,"NA",3.3,3.3,y,0,hobo attached to base of minidot rack
-st33_ben_20Aug2018_04Jun2019_A,st33,ben,2018-08-20,2019-06-04,A,2.8,3.3,n,0,hobo affixed to top of rack
-st33_ben_20Aug2018_04Jun2019_B,st33,ben,2018-08-20,2019-06-04,B,2.8,3.3,n,0,hobo affixed to top of rack
-st33_ben_13Jun2019_15Aug2019,st33,ben,2019-06-13,2019-08-15,"NA",2.8,3.3,n,0,hobo affixed to top of rack
-st33_out_13May2013_21Aug2013,st33,out,2013-05-13,2013-08-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_24May2015_15Jul2015,st33,out,2015-05-24,2015-07-15,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_11Jul2015_21Aug2015,st33,out,2015-07-11,2015-08-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_25May2017_17Jul2017,st33,out,2017-05-25,2017-07-17,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_17Jul2017_20Aug2017,st33,out,2017-07-17,2017-08-20,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_20Aug2017_05Oct2017,st33,out,2017-08-20,2017-10-05,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_21May2018_21Jul2018,st33,out,2018-05-21,2018-07-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_21Jul2018_18Aug2018,st33,out,2018-07-21,2018-08-18,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_31May2019_23Jul2019,st33,out,2019-05-31,2019-07-23,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_22Jul2019_15Aug2019,st33,out,2019-07-22,2019-08-15,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_pel_13Jun2018_16Aug2018,st33,pel,2018-06-13,2018-08-16,"NA",1,3.3,y,0,hobo in tube on cord
-st33_out_27May2016_21Jul2016,st33,out,2016-05-27,2016-07-21,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_08Jun2014_19Aug2014,st33,out,2014-05-08,2014-08-19,"NA",-1,3.3,n,0,hobo attached to top of sonde buoy
-st33_out_20Jul2020_1Sept2020,st33,out,2020-07-20,2020-09-01,"NA",-1,3.3,n,0,hobo attached to top of buoy
-reyk_ben_1Sept2019_1Oct2020_A,reyk,ben,2019-09-01,2020-10-01,A,1.7999999999999998,4.3,n,0,NA
-reyk_ben_1Sept2019_1Oct2020_B,reyk,ben,2019-09-01,2020-10-01,B,2.9,4.3,n,0,NA
-reyk_ben_1Sept2019_1Oct2020_C,reyk,ben,2019-09-01,2020-10-01,C,3.8,4.3,n,0,NA
-st33_ben_28Jul2020_28Aug2020,st33,ben,2020-07-28,2020-08-28,"NA",2.8,3.3,n,0,hobo attached to top of rack
-e1_pel_29Jul2020_28Aug2020,e1,pel,2020-07-29,2020-08-28,"NA",1,2.7,n,0,NA
-e2_pel_28Jul2020_28Aug2020,e2,pel,2020-07-28,2020-08-28,"NA",1,NA,n,0,NA
-e5_pel_28Jul2020_28Aug2020,e5,pel,2020-07-28,2020-08-28,"NA",1,2.5,n,0,NA
-e6_pel_29Jul2020_28Aug2020,e6,pel,2020-07-29,2020-08-28,"NA",1,NA,n,0,NA
-e1_ben_20Aug2019_2Jun2020_C,e1,ben,2019-08-20,2020-06-02,C,2.2,2.7,n,0,NA
-e6_ben_20Aug2019_2Jun2020_C,e6,ben,2019-08-20,2020-06-02,C,2.3,2.8,n,0,NA
-st33_ben_20Aug2019_21Jul2020_C,st33,ben,2019-08-20,2020-07-21,C,2.8,3.3,n,0,NA
-st33_ben_20Aug2019_21Jul2020_A,st33,ben,2019-08-20,2020-07-21,A,1.7999999999999998,3.3,n,1,exact depth not known; affixed to the buoy line
-st33_ben_20Aug2019_21Jul2020_B,st33,ben,2019-08-20,2020-07-21,B,2.6999999999999997,3.3,n,1,exact depth not known; affixed to the buoy line
-e1_ben_20Aug2019_2Jun2020_B,e1,ben,2019-08-20,2020-06-02,B,2.4000000000000004,2.7,n,1,exact depth not known; affixed to the buoy line
-e1_ben_20Aug2019_2Jun2020_A,e1,ben,2019-08-20,2020-06-02,A,1.7000000000000002,2.7,n,1,exact depth not known; affixed to the buoy line
-e6_ben_20Aug2019_2Jun2020_A,e6,ben,2019-08-20,2020-06-02,A,1.8,2.8,n,1,exact depth not known; affixed to the buoy line
-e6_ben_20Aug2019_2Jun2020_B,e6,ben,2019-08-20,2020-06-02,B,2.5,2.8,n,1,exact depth not known; affixed to the buoy line
-e1_ben_19Jun2021_20Aug2021,e1,ben,2021-06-19,2021-08-20,"NA",2.4,2.7,n,0,NA
-e1_pel_7Jun2021_20Aug2021,e1,pel,2021-06-07,2021-08-20,"NA",0.5,2.7,n,0,NA
-e2_ben_19Jun2021_20Aug2021,e2,ben,2021-06-19,2021-08-20,"NA",2.4,2.7,n,0,NA
-e2_pel_7Jun2021_20Aug2021,e2,pel,2021-06-07,2021-08-20,"NA",0.5,2.7,n,0,NA
-e4_ben_19Jun2021_20Aug2021,e4,ben,2021-06-19,2021-08-20,"NA",2.6,2.9,n,0,NA
-e4_pel_7Jun2021_20Aug2021,e4,pel,2021-06-07,2021-08-20,"NA",0.5,2.9,n,1,some fouling on sensor
-e5_ben_19Jun2021_20Aug2021,e5,ben,2021-06-19,2021-08-20,"NA",2.2,2.5,n,0,NA
-e5_pel_5Jun2021_20Aug2021,e5,pel,2021-06-07,2021-08-20,"NA",0.5,2.5,n,0,NA
-e6_ben_3Sep20_27May21_A,e6,ben,2020-09-03,2021-05-27,A,1.8,2.8,n,0,attached to cord
-e6_ben_3Sep20_27May21_B,e6,ben,2020-09-03,2021-05-27,B,2.3,2.8,n,0,attached to minidot frame
-e6_ben_3Sep20_27May21_C,e6,ben,2020-09-03,2021-05-27,C,2.5,2.8,n,0,attached to cord
-e6_ben_19Jun21_20Aug2021,e6,ben,2021-06-19,2021-08-20,"NA",2.3,2.8,n,0,NA
-e6_pel_5Jun2021_20Aug2021,e6,pel,2021-06-07,2021-08-20,"NA",0.5,2.8,n,1,lots of fouling on sensor
-st33_ben_3Sep2020_25May2021_A,st33,ben,2020-09-03,2021-05-25,A,2.3,3.3,n,0,attached to cord
-st33_ben_3Sep2020_25May2021_B,st33,ben,2020-09-03,2021-05-25,B,2.8,3.3,n,0,attached to minidot frame
-st33_ben_3Sep2020_25May2021_C,st33,ben,2020-09-03,2021-05-25,C,3,3.3,n,0,attached to cord
-st33_ben_19Jun2021_20Aug2021,st33,ben,2021-06-19,2021-08-20,"NA",3,3.3,n,0,NA
-st33_pel_19June2021_20Aug2021,st33,pel,2021-06-19,2021-08-20,"NA",1,3.3,n,1,lots of fouling on sensor
-st33_out_18May2021_18Jul2021,st33,out,2021-05-18,2021-07-18,"NA",-1,3.3,n,0,NA
-st33_out_19Jul2021_20Aug2021,st33,out,2021-07-18,2021-08-20,"NA",-1,3.3,n,0,NA
+﻿name,site,layer,date_in,date_out,hobo_id,sensor_depth,site_depth,acryllic,lat,lon,flag,comments,,,,,
+cs_ben_20Aug2018_04Jun2019_A,cs,ben,2018-08-20,2019-06-04,A,,,n,NA,NA,1,hobo affixed to top of rack,,,,,
+cs_ben_20Aug2018_04Jun2019_B,cs,ben,2018-08-20,2019-06-04,B,,,n,NA,NA,1,hobo affixed to top of rack,,,,,
+e1_ben_22Aug2017_29May2018_A,e1,ben,2017-08-22,2018-05-29,A,,2.7,,NA,NA,1,hobo attached gray box?,,,,,
+e1_ben_22Aug2017_29May2018_B,e1,ben,2017-08-22,2018-05-29,B,,2.7,,NA,NA,1,hobo attached gray box?,,,,,
+e1_ben_20Aug2018_04Jun2019_A,e1,ben,2018-08-20,2019-06-04,A,2.2,2.7,n,NA,NA,0,hobo affixed to top of rack,,,,,
+e1_ben_20Aug2018_04Jun2019_B,e1,ben,2018-08-20,2019-06-04,B,2.2,2.7,n,NA,NA,0,hobo affixed to top of rack,,,,,
+e5_ben_20Aug2018_03Jun2019_B,e5,ben,2018-08-20,2019-06-03,B,2,2.5,n,NA,NA,0,hobo affixed to top of rack,,,,,
+e5_ben_20Aug2018_04Jun2019_A,e5,ben,2018-08-20,2019-06-04,A,2,2.5,n,NA,NA,0,hobo affixed to top of rack,,,,,
+e5_ben_13Jun2019_15Aug2019,e5,ben,2019-06-13,2019-08-15,NA,2,2.5,n,NA,NA,0,hobo affixed to top of rack,,,,,
+e5_pel_13Jun2019_15Aug2019,e5,pel,2019-06-13,2019-08-15,NA,1,2.5,y,NA,NA,0,hobo in tube on cord,,,,,
+grim_ben_13Jun2018_18Jul2018,grim,ben,2018-06-13,2018-07-18,NA,5.1,5.1,y,NA,NA,0,hobo attached to base of minidot rack,,,,,
+grim_ben_17Jul2018_16Aug2018,grim,ben,2018-07-17,2018-08-16,NA,5.1,5.1,y,NA,NA,0,hobo attached to base of minidot rack,,,,,
+grim_ben_16Jun2019_15Aug2019,grim,ben,2019-06-16,2019-08-15,NA,6,6.5,n,NA,NA,0,hobo affixed to top of rack,,,,,
+grim_pel_13Jun2018_18Jul2018,grim,pel,2018-06-13,2018-07-18,NA,1,5.1,y,NA,NA,0,hobo in tube on cord,,,,,
+grim_pel_17Jul2018_16Aug2018,grim,pel,2018-07-17,2018-08-16,NA,1,5.1,y,NA,NA,0,hobo in tube on cord,,,,,
+grim_pel_16Jun2019_15Aug2019,grim,pel,2019-06-16,2019-08-15,NA,1,6.5,y,NA,NA,0,hobo in tube on cord,,,,,
+reyk_ben_13Jun2018_18Jul2018,reyk,ben,2018-06-13,2018-07-18,NA,4.25,4.25,y,NA,NA,0,hobo attached to base of minidot rack,,,,,
+reyk_ben_17Jul2018_16Aug2018,reyk,ben,2018-07-17,2018-08-16,NA,4.25,4.25,y,NA,NA,0,hobo attached to base of minidot rack,,,,,
+reyk_ben_20Aug2018_04Jun2019_A,reyk,ben,2018-08-20,2019-06-04,A,3.8,4.3,n,NA,NA,1,rack covered in macrophytes when retrieved; hobo affixed to top of rack,,,,,
+reyk_ben_20Aug2018_04Jun2019_B,reyk,ben,2018-08-20,2019-06-04,B,3.8,4.3,n,NA,NA,1,rack covered in macrophytes when retrieved; hobo affixed to top of rack,,,,,
+reyk_ben_16Jun2019_15Aug2019,reyk,ben,2019-06-16,2019-08-15,NA,3.8,4.3,n,NA,NA,0,hobo affixed to top of rack,,,,,
+reyk_pel_13Jun2018_18Jul2018,reyk,pel,2018-06-13,2018-07-18,NA,1,4.25,y,NA,NA,0,hobo in tube on cord,,,,,
+reyk_pel_17Jul2018_16Aug2018,reyk,pel,2018-07-17,2018-08-16,NA,1,4.25,y,NA,NA,0,hobo in tube on cord,,,,,
+reyk_pel_16Jun2019_15Aug2019,reyk,pel,2019-06-16,2019-08-15,NA,1,4.3,y,NA,NA,0,hobo in tube on cord,,,,,
+st33_ben_22Aug2017_29May2018_B,st33,ben,2017-08-22,2018-05-29,B,,3.3,,NA,NA,1,hobo attached gray box?,,,,,
+st33_ben_22Aug2017_31May2018_A,st33,ben,2017-08-22,2018-05-31,A,,3.3,,NA,NA,1,hobo attached gray box?,,,,,
+st33_ben_13Jun2018_16Aug2018,st33,ben,2018-06-13,2018-08-16,NA,3.3,3.3,y,NA,NA,0,hobo attached to base of minidot rack,,,,,
+st33_ben_20Aug2018_04Jun2019_A,st33,ben,2018-08-20,2019-06-04,A,2.8,3.3,n,NA,NA,0,hobo affixed to top of rack,,,,,
+st33_ben_20Aug2018_04Jun2019_B,st33,ben,2018-08-20,2019-06-04,B,2.8,3.3,n,NA,NA,0,hobo affixed to top of rack,,,,,
+st33_ben_13Jun2019_15Aug2019,st33,ben,2019-06-13,2019-08-15,NA,2.8,3.3,n,NA,NA,0,hobo affixed to top of rack,,,,,
+st33_out_13May2013_21Aug2013,st33,out,2013-05-13,2013-08-21,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_24May2015_15Jul2015,st33,out,2015-05-24,2015-07-15,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_11Jul2015_21Aug2015,st33,out,2015-07-11,2015-08-21,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_25May2017_17Jul2017,st33,out,2017-05-25,2017-07-17,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_17Jul2017_20Aug2017,st33,out,2017-07-17,2017-08-20,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_20Aug2017_05Oct2017,st33,out,2017-08-20,2017-10-05,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_21May2018_21Jul2018,st33,out,2018-05-21,2018-07-21,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_21Jul2018_18Aug2018,st33,out,2018-07-21,2018-08-18,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_31May2019_23Jul2019,st33,out,2019-05-31,2019-07-23,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_22Jul2019_15Aug2019,st33,out,2019-07-22,2019-08-15,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_pel_13Jun2018_16Aug2018,st33,pel,2018-06-13,2018-08-16,NA,1,3.3,y,NA,NA,0,hobo in tube on cord,,,,,
+st33_out_27May2016_21Jul2016,st33,out,2016-05-27,2016-07-21,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_08Jun2014_19Aug2014,st33,out,2014-05-08,2014-08-19,NA,-1,3.3,n,NA,NA,0,hobo attached to top of sonde buoy,,,,,
+st33_out_20Jul2020_1Sept2020,st33,out,2020-07-20,2020-09-01,NA,-1,3.3,n,0408498,7273661,0,hobo attached to top of buoy,,,,,
+reyk_ben_1Sept2019_1Oct2020_A,reyk,ben,2019-09-01,2020-10-01,A,1.8,4.3,n,0409726,7275870,0,,,,,,
+reyk_ben_1Sept2019_1Oct2020_B,reyk,ben,2019-09-01,2020-10-01,B,2.9,4.3,n,0405970,7274492,0,,,,,,
+reyk_ben_1Sept2019_1Oct2020_C,reyk,ben,2019-09-01,2020-10-01,C,3.8,4.3,n,0411401,7281207,0,,,,,,
+st33_ben_28Jul2020_28Aug2020,st33,ben,2020-07-28,2020-08-28,NA,2.8,3.3,n,0407631,7276125,0,hobo attached to top of rack,,,,,
+e1_pel_29Jul2020_28Aug2020,e1,pel,2020-07-29,2020-08-28,NA,1,2.7,n,NA,NA,0,,,,,,
+e2_pel_28Jul2020_28Aug2020,e2,pel,2020-07-28,2020-08-28,NA,1,,n,NA,NA,0,,,,,,
+e5_pel_28Jul2020_28Aug2020,e5,pel,2020-07-28,2020-08-28,NA,1,2.5,n,NA,NA,0,,,,,,
+e6_pel_29Jul2020_28Aug2020,e6,pel,2020-07-29,2020-08-28,NA,1,,n,NA,NA,0,,,,,,
+e1_ben_20Aug2019_2Jun2020_C,e1,ben,2019-08-20,2020-06-02,C,2.2,2.7,n,0407614,7276069,0,,,,,,
+e6_ben_20Aug2019_2Jun2020_C,e6,ben,2019-08-20,2020-06-02,C,2.3,2.8,n,0409839,7276330,0,,,,,,
+st33_ben_20Aug2019_21Jul2020_C,st33,ben,2019-08-20,2020-07-21,C,2.8,3.3,n,0409865,7276316,0,,,,,,
+st33_ben_20Aug2019_21Jul2020_A,st33,ben,2019-08-20,2020-07-21,A,1.8,3.3,n,0411411,7281201,1,exact depth not known; affixed to the buoy line,,,,,
+st33_ben_20Aug2019_21Jul2020_B,st33,ben,2019-08-20,2020-07-21,B,2.7,3.3,n,NA,NA,1,exact depth not known; affixed to the buoy line,,,,,
+e1_ben_20Aug2019_2Jun2020_B,e1,ben,2019-08-20,2020-06-02,B,2.4,2.7,n,NA,NA,1,exact depth not known; affixed to the buoy line,,,,,
+e1_ben_20Aug2019_2Jun2020_A,e1,ben,2019-08-20,2020-06-02,A,1.7,2.7,n,NA,NA,1,exact depth not known; affixed to the buoy line,,,,,
+e6_ben_20Aug2019_2Jun2020_A,e6,ben,2019-08-20,2020-06-02,A,1.8,2.8,n,NA,NA,1,exact depth not known; affixed to the buoy line,,,,,
+e6_ben_20Aug2019_2Jun2020_B,e6,ben,2019-08-20,2020-06-02,B,2.5,2.8,n,NA,NA,1,exact depth not known; affixed to the buoy line,,,,,
+e1_ben_19Jun2021_20Aug2021,e1,ben,2021-06-19,2021-08-20,NA,2.4,2.7,n,NA,NA,0,,,,,,
+e1_pel_7Jun2021_20Aug2021,e1,pel,2021-06-07,2021-08-20,NA,0.5,2.7,n,NA,NA,0,,,,,,
+e2_ben_19Jun2021_20Aug2021,e2,ben,2021-06-19,2021-08-20,NA,2.4,2.7,n,NA,NA,0,,,,,,
+e2_pel_7Jun2021_20Aug2021,e2,pel,2021-06-07,2021-08-20,NA,0.5,2.7,n,NA,NA,0,,,,,,
+e4_ben_19Jun2021_20Aug2021,e4,ben,2021-06-19,2021-08-20,NA,2.6,2.9,n,NA,NA,0,,,,,,
+e4_pel_7Jun2021_20Aug2021,e4,pel,2021-06-07,2021-08-20,NA,0.5,2.9,n,NA,NA,1,some fouling on sensor,,,,,
+e5_ben_19Jun2021_20Aug2021,e5,ben,2021-06-19,2021-08-20,NA,2.2,2.5,n,NA,NA,0,,,,,,
+e5_pel_5Jun2021_20Aug2021,e5,pel,2021-06-07,2021-08-20,NA,0.5,2.5,n,NA,NA,0,,,,,,
+e6_ben_3Sep20_27May21_A,e6,ben,2020-09-03,2021-05-27,A,1.8,2.8,n,NA,NA,0,attached to cord,,,,,
+e6_ben_3Sep20_27May21_B,e6,ben,2020-09-03,2021-05-27,B,2.3,2.8,n,NA,NA,0,attached to minidot frame,,,,,
+e6_ben_3Sep20_27May21_C,e6,ben,2020-09-03,2021-05-27,C,2.5,2.8,n,NA,NA,0,attached to cord,,,,,
+e6_ben_19Jun21_20Aug2021,e6,ben,2021-06-19,2021-08-20,NA,2.3,2.8,n,NA,NA,0,,,,,,
+e6_pel_5Jun2021_20Aug2021,e6,pel,2021-06-07,2021-08-20,NA,0.5,2.8,n,NA,NA,1,lots of fouling on sensor,,,,,
+st33_ben_3Sep2020_25May2021_A,st33,ben,2020-09-03,2021-05-25,A,2.3,3.3,n,NA,NA,0,attached to cord,,,,,
+st33_ben_3Sep2020_25May2021_B,st33,ben,2020-09-03,2021-05-25,B,2.8,3.3,n,NA,NA,0,attached to minidot frame,,,,,
+st33_ben_3Sep2020_25May2021_C,st33,ben,2020-09-03,2021-05-25,C,3,3.3,n,NA,NA,0,attached to cord,,,,,
+st33_ben_19Jun2021_20Aug2021,st33,ben,2021-06-19,2021-08-20,NA,3,3.3,n,NA,NA,0,,,,,,
+st33_pel_19June2021_20Aug2021,st33,pel,2021-06-19,2021-08-20,NA,1,3.3,n,NA,NA,1,lots of fouling on sensor,,,,,
+st33_out_18May2021_18Jul2021,st33,out,2021-05-18,2021-07-18,NA,-1,3.3,n,NA,NA,0,,,,,,
+st33_out_19Jul2021_20Aug2021,st33,out,2021-07-18,2021-08-20,NA,-1,3.3,n,NA,NA,0,,,,,,
+e1_ben_22Aug21_6Jun22_A,e1,ben,2022-08-23,2022-06-06,A,1.8,2.7,n,0405970,7276137,0,,,,,,
+e1_ben_22Aug21_6Jun22_B,e1,ben,2022-08-23,2022-06-06,B,2.1,2.7,n,0405970,7276137,0,,,,,,
+e1_ben_22Aug21_6Jun22_C,e1,ben,2022-08-23,2022-06-06,C,2.4,2.7,n,0405970,7276137,1,hobo did not appear to take any data,,,,,
+st33_ben_22Aug21_6Jun22_A,st33,ben,2022-08-23,2022-06-06,A,2.4,3.3,n,0407638,7276137,0,,,,,,
+st33_ben_22Aug21_6Jun22_B,st33,ben,2022-08-23,2022-06-06,B,2.7,3.3,n,0407638,7276137,0,,,,,,
+st33_ben_22Aug21_6Jun22_C,st33,ben,2022-08-23,2022-06-06,C,3,3.3,n,0407638,7276137,0,,,,,,
+e2_ben_22Aug21_6Jun22_A,e2,ben,2022-08-23,2022-06-06,A,1.8,2.7,n,0407638,7276137,0,,,,,,
+e2_ben_22Aug21_6Jun22_B,e2,ben,2022-08-23,2022-06-06,B,2.1,2.7,n,0407638,7276137,0,,,,,,
+e2_ben_22Aug21_6Jun22_C,e2,ben,2022-08-23,2022-06-06,C,2.4,2.7,n,0407638,7276137,0,,,,,,
+e4_ben_22Aug21_7Jun22_A,e4,ben,2022-08-23,2022-06-07,A,2,2.9,n,0407648,7277822,0,,,,,,
+e4_ben_22Aug21_7Jun22_B,e4,ben,2022-08-23,2022-06-07,B,2.3,2.9,n,0407648,7277822,0,,,,,,
+e4_ben_22Aug21_7Jun22_C,e4,ben,2022-08-23,2022-06-07,C,2.6,2.9,n,0407648,7277822,0,,,,,,
+e5_ben_22Aug21_7Jun22_A,e5,ben,2022-08-23,2022-06-07,A,1.6,2.5,n,0409778,7276398,0,,,,,,
+e5_ben_22Aug21_7Jun22_B,e5,ben,2022-08-23,2022-06-07,B,1.9,2.5,n,0409778,7276398,0,,,,,,
+e5_ben_22Aug21_7Jun22_C,e5,ben,2022-08-23,2022-06-07,C,2.2,2.5,n,0409778,7276398,0,,,,,,
+e6_ben_22Aug21_7Jun22_A,e6,ben,2022-08-23,2022-06-07,A,1.9,2.8,n,0408984,7274408,0,,,,,,
+e6_ben_22Aug21_7Jun22_B,e6,ben,2022-08-23,2022-06-07,B,2.2,2.8,n,0408984,7274408,0,,,,,,
+e6_ben_22Aug21_7Jun22_C,e6,ben,2022-08-23,2022-06-07,C,2.5,2.8,n,0408984,7274408,0,,,,,,
+,st33,out,2022-05-25,,NA,-1,3.3,n,NA,NA,0,,,,,,
+,e6,pel,2022-06-15,,,,,n,0408948,7274473,0,in at 10:38,,,,,
+,e6,ben,2022-06-15,,,,,n,0408957,7274468,0,in at 10:38,,,,,
+,e5,pel,2022-06-15,,,,,n,0409732,7276406,0,in at 11:12,,,,,
+,e5,ben,2022-06-15,,,,,n,0409723,7276416,0,in at 11:12,,,,,
+,e4,pel,2022-06-15,,,,,n,0407666,7278611,0,in at 12:00,,,,,
+,e4,ben,2022-06-15,,,,,n,0407679,7278608,0,in at 12:00,,,,,
+,st33,pel,2022-06-15,,,,,n,0407597,7276056,0,in at 12:27,,,,,
+,st33,ben,2022-06-15,,,,,n,0407597,7276056,0,in at 12:27,,,,,
+,e2,pel,2022-06-15,,,,,n,0406257,7278042,0,in at 12:51,,,,,
+,e2,ben,2022-06-15,,,,,n,0406257,7278041,0,in at 12:51,,,,,
+,e1,pel,2022-06-15,,,,,n,0405941,7274447,0,in at 13:22,,,,,
+,e1,ben,2022-06-15,,,,,n,0405939,7274448,0,in at 13:22,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,

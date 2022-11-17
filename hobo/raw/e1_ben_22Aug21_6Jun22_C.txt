@@ -1,0 +1,3 @@
+﻿"Plot Title: e1_30cm_22Aug21"
+"#","Date Time, GMT+00:00","Temp, °C (LGR S/N: 9912065, SEN S/N: 9912065, LBL: temp)","Intensity, Lux (LGR S/N: 9912065, SEN S/N: 9912065, LBL: light)","End Of File (LGR S/N: 9912065)"
+1,08/22/21 05:05:07 PM,,,Logged
