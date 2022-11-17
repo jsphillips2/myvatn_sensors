@@ -83,6 +83,8 @@ for(i in 1:length(flaglist)){
 all(hobo_list %>% 
   lapply(function(x){class(x$lux)})=="numeric")
 
+which(hobo_list %>% 
+      lapply(function(x){class(x$lux)})!="numeric")
 
 # bind rows
 hobos = hobo_list %>%
